@@ -21,8 +21,9 @@ class UpdateBlogRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('blog')->id;
         return [
-            'title'     => 'required|unique:blogs,title',
+            'title'     => 'required|unique:blogs,title,'.$id,
             'content'   => 'required',
             'image_path'=> 'required|image',
             'author'    => 'required'

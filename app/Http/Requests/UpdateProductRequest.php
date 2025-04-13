@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Product;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -21,9 +22,10 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('product')->id;
         return [
-            'category_id'   => 'required|unique:products,category_id',
-            'name'          => 'required|unique:products,name',
+            'category_id'   => 'required|unique:products,category_id,'.$id,
+            'name'          => 'required|unique:products,name,'.$id,
             'quantity'      => 'required|numeric',
             'image_path'    => 'required|image',
             'price'         => 'required|numeric',
