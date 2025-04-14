@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    const type_member = 'member';
+    const type_admin = 'admin';
+
+
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'type'
     ];
 
     /**
@@ -44,5 +50,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin() {
+        return $this->type == self::type_admin;
+    }
+    public function isMember() {
+        return $this->type == self::type_member;
     }
 }

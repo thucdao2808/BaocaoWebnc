@@ -11,17 +11,17 @@
                 <div class="header-button">
                     <div class="noti-wrap">
                         <div class="noti__item js-item-menu">
-                            <i class="zmdi zmdi-comment-more"></i>
-                            <span class="quantity">1</span>
+                            <i class="fa-solid fa-user"  data-bs-toggle="dropdown" aria-expanded="true"></i>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <form action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <button type="submit">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="noti__item js-item-menu">
-                            <i class="zmdi zmdi-email"></i>
-                            <span class="quantity">1</span>
-                        </div>
-                        <div class="noti__item js-item-menu">
-                            <i class="zmdi zmdi-notifications"></i>
-                            <span class="quantity">3</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
