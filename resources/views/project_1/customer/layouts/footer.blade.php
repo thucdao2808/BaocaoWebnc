@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="title m-2">
-                    <img src="../image/footer-logo.png" alt="" srcset="">
+                    <img src="{{asset('images/footer-logo.png')}}" alt="" srcset="">
                 </div>
                 <div class="content text-gray">
                     <span class="fw-medium">1418 River Drive, Suite 35 Cottonhall, CA 9622 United States</span>
