@@ -1,0 +1,33 @@
+.bg-gray {
+    background-color: rgb(202, 202, 202) !important
+}
+
+.font-icon {
+    font-size: 22px !important
+}
+
+.col-xs-5 {
+    width: 5/12vh;
+}
+.nav-link:hover {
+    color: red !important;
+}
+
+
+.product-meta {
+    background-color: rgb(255, 250, 250);
+}
+
+.text-gray {
+    color: rgb(106, 106, 106) !important;
+}
+
+
+.product-meta {
+    box-shadow: 2px 2px 8px #888888;
+}
+
+.product-meta:hover {
+    box-shadow: 6px 6px 8px #888888;
+}
+
