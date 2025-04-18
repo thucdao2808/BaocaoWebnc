@@ -18,7 +18,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private $tag ;
 
+    public function __construct(Tag $tag){
+        $this->tag= $tag;
+    }
     public function index()
     {
         $products = Product::paginate(5);
@@ -70,7 +74,22 @@ class ProductController extends Controller
                         ]);
                     }
                 }
-                $product->tags()->attach($request->tags);
+                $tagIds =[];
+                //insert tags for product
+                if(!empty($request->tags)){
+                    foreach($request->tags as $tagItem){
+                    // insert to Tags
+                    $tagInstance = $this->tag->firstOrCreate([
+                        'name'=>$tagItem,
+            
+                    ]);
+                    $tagIds[]=$tagInstance->id ;
+                    
+                }
+                
+                
+                  $product->tags()->attach($tagIds);
+                }
             });
     
             return redirect()->route('products.create')->with('success', 'Thêm dữ liệu thành công');
@@ -123,8 +142,20 @@ class ProductController extends Controller
                   
                 }
                 $product->update($dataproduct);
+                $tagIds = [];
+                if(!empty($request->tags)){
+                    
+                    foreach($request->tags as $tagItem){
+                    // insert to Tags
+                    $tagInstance = $this->tag->firstOrCreate([
+                        'name'=>$tagItem,
+                       
+                    ]); 
+                    $tagIds[]=$tagInstance->id ;
+                         
+                }}
 
-                $product->tags()->sync($request->tags);
+                $product->tags()->sync($tagIds);
 
 
 

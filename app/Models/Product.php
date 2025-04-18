@@ -27,8 +27,8 @@ class Product extends Model
         return $this->hasMany(Gallery::class);
     }
 
-    public function tags() {
-        return $this->belongsToMany(Tag::class);
+    public function tags(){
+        return $this->belongsToMany(Tag::class,'product_tag','product_id','tag_id')->withTimestamps();
     }
 
 }

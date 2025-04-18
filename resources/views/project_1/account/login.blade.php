@@ -42,7 +42,7 @@
                 <!-- Email input -->
                     @csrf
                     <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" name="username" id="form1Example13" class="form-control form-control-lg" />
+                    <input type="text" name="username" id="form1Example13" class="form-control form-control-lg" value ="{{old('username')}}"/>
                     <label class="form-label"  for="form1Example13">Tên đăng nhập</label>
                     </div>
         
