@@ -1,5 +1,16 @@
 @extends('project_1.admin.layouts.layout')
- 
+@section('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-container--default .select2-selection--multiple {
+        min-height: 40px;
+        padding: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+       width: 400px;
+    }
+</style>
+@endsection
  
 @section('content')
 
@@ -44,15 +55,15 @@
             </select>
 
 
-
-            <select class="form-select mb-3"  multiple  name="tags[]" id="" >
-                <option disabled>Chọn tên thẻ</option>
-                @foreach ($tags as $tag )
-
-                <option @selected($product->tags->contains('id', $tag->id)) value="{{$tag->id}}">{{$tag->name}}</option>
+            <label for="">Nhập tags cho sản phẩm </label>
+            <div class="form-control">
+                <select name = "tags[]"  class="form-control  tags_select_choose" multiple="multiple">
+                    @foreach ($product->tags as $tagItem)
+                        <option value="{{$tagItem->name}}" selected>{{$tagItem->name}}</option>
+                    @endforeach
                     
-                @endforeach
-            </select>
+                </select>
+            </div>
 
             <label for="name" >Tên sản phẩm</label>
             <input type="text" name="name" class="form-control mb-3"  value="{{$product->name}}">

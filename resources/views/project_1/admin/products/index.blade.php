@@ -1,6 +1,22 @@
 @extends('project_1.admin.layouts.layout')  
- 
+@section('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-container--default .select2-selection--multiple {
+        min-height: 40px;
+        padding: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+       width: 400px;
+       
+    }
+    .select2-selection__choice__display {
+        background-color: #0ff129;
+    }
+</style>
+@endsection
 @section('content')
+
 
 <div class="main-content">
     <div class="m-3 bg-white py-3">
@@ -49,9 +65,12 @@
                        <td>{{$product->category->name}}</td>
                       
                        <td>
-                           @foreach ($product->tags as $tag)
-                               <span class="badge bg-success">{{$tag->name}}</span>
-                           @endforeach
+                            <select name = "tags[]"  class="form-control  tags_select_choose" multiple="multiple">
+                                @foreach ($product->tags as $tagItem)
+                                    <option value="{{$tagItem->name}}" selected>{{$tagItem->name}}</option>
+                                @endforeach
+                                
+                            </select>
                        </td>
 
                        <td>{{$product->quantity}}</td>

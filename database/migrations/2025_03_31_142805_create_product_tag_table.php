@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Tag::class)->constrained();
             $table->primary(['product_id' , 'tag_id']);
             
+            
         });
     }
 

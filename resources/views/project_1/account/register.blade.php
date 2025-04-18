@@ -45,18 +45,18 @@
                 <!-- Email input -->
                 @csrf
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" name="username" id="name" class="form-control form-control-lg" />
-                  <label class="form-label" for="name">Tên đăng nhâp</label>
+                  <input type="text" name="username" id="name" class="form-control form-control-lg" value ="{{old('username')}}"/>
+                  <label class="form-label" for="name" >Tên đăng nhâp</label>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" name="email" id="form1Example13" class="form-control form-control-lg" />
+                  <input type="email" name="email" id="form1Example13" class="form-control form-control-lg" value ="{{old('email')}}"/>
                   <label class="form-label" for="form1Example13">Email</label>
                 </div>
       
                 <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" name="password" id="form1Example23" class="form-control form-control-lg" />
+                  <input type="password" name="password" id="form1Example23" class="form-control form-control-lg" value ="{{old('password')}}"/>
                   <label class="form-label" for="form1Example23">Mật khẩu</label>
                 </div>
 

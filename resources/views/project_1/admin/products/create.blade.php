@@ -1,7 +1,28 @@
 @extends('project_1.admin.layouts.layout')
  
- 
+@section('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-container--default .select2-selection--multiple {
+        min-height: 40px;
+        padding: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+       width: 400px;
+    }
+</style>
+@endsection
+
+@section('js')
+
+
 @section('content')
+
+
+
+{{-- JS Select2 --}}
+
+
 
 <div class="main-content">
 
@@ -42,15 +63,20 @@
             </select>
 
 
-            <label for="tags" class="form-label">Tên thẻ</label>
-            <select class="form-select mb-3"  multiple  name="tags[]" id="tags" >
-                <option selected>Chọn tên thẻ</option>
-                @foreach ($tags as $tag )
-
-                <option  value="{{$tag->id}}">{{$tag->name}}</option>
-                    
-                @endforeach
-            </select>
+            
+            <div class="form-group">
+                <label >Nhập tags cho sản phẩm </label>
+                <div class="form-control mb-3">
+                    <select name="tags[]" class="  tags_select_choose" multiple="multiple">
+                        @if (old('tags'))
+                            @foreach (old('tags') as $tag)
+                                <option value="{{ $tag }}" selected>{{ $tag }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                
+            </div>
 
             <label for="name" class="form-label">Tên sản phẩm</label>
             <input type="text" name="name" class="form-control mb-3"  value="{{old('name')}}">
@@ -84,5 +110,7 @@
     </div>
    
 </div>
+
+
 
 @endsection
