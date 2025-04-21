@@ -67,7 +67,7 @@
             <div class="form-group">
                 <label >Nhập tags cho sản phẩm </label>
                 <div class="form-control mb-3">
-                    <select name="tags[]" class="  tags_select_choose" multiple="multiple">
+                    <select name="tags[]" class="tags_select_choose" multiple="multiple">
                         @if (old('tags'))
                             @foreach (old('tags') as $tag)
                                 <option value="{{ $tag }}" selected>{{ $tag }}</option>

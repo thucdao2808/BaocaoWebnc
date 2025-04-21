@@ -18,7 +18,15 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth',isMember::class])->get('home', [HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth',isMember::class])->prefix('home')->group(function() {
+
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
+});
+
 
 Route::get('/login', [AuthController::class, 'Showform_login'])->name('login');
 Route::get('/register', [AuthController::class, 'Showform_register'])->name('register');
