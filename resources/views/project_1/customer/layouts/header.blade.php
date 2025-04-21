@@ -34,7 +34,17 @@
             <div
                 class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-4 d-flex justify-content-around align-items-center order-2">
                 <div class="user_icon font-icon">
-                    <i class="fa-solid fa-user fs-5"></i>
+                    <div class="noti__item js-item-menu">
+                        <i class="fa-solid fa-user"  data-bs-toggle="dropdown" aria-expanded="true"></i>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <button type="submit">Đăng xuất</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="cart_icon font-icon">
                     <i class="fa-solid fa-cart-shopping fs-5"></i>

@@ -31,3 +31,31 @@
     box-shadow: 6px 6px 8px #888888;
 }
 
+.product-img {
+    height: 380px; /* mobile mặc định */
+}
+
+@media (min-width: 768px) {
+.product-img {
+    height: 350px; /* tablet trở lên */
+    overflow: hidden;
+}
+}
+  
+
+  
+@media (min-width: 1200px) {
+.product-img {
+    height: 250px; /* desktop trở lên */
+    overflow: hidden;
+}
+}
+
+.rank {
+    font-size: 10px;
+}
+
+.quantity {
+    width: 60px;
+    
+}

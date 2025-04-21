@@ -44,10 +44,10 @@
                 <div class="collapse d-md-block" id="myAccountList">
                   <div class="content text-gray">
                     <ul class="list-unstyled fw-medium">
-                      <li>My Account</li>
-                      <li>Contact</li>
-                      <li>Shopping cart</li>
-                      <li>Shop</li>
+                      <li class="nav-link">My Account</li>
+                      <li class="nav-link">Contact</li>
+                      <li class="nav-link">Shopping cart</li>
+                      <li class="nav-link">Shop</li>
                     </ul>
                   </div>
                 </div>
@@ -62,8 +62,7 @@
                       data-bs-target="#infoList" 
                       role="button" 
                       aria-expanded="false" 
-                      aria-controls="infoList">
-                    Information
+                      aria-controls="infoList">Contact
                     <i class="fa-solid fa-caret-down d-lg-none text-gray"></i> <!-- chỉ hiện icon khi nhỏ -->
                   </h4>
                 </div>
@@ -71,12 +70,12 @@
                 <div class="collapse d-lg-block" id="infoList">
                   <div class="content text-gray">
                     <ul class="list-unstyled fw-medium">
-                      <li>Help Center</li>
-                      <li>Returns Product</li>
-                      <li>Recalls</li>
-                      <li>Accessibility</li>
-                      <li>Contact Us</li>
-                      <li>Store Pickup</li>
+                      <li class="nav-link">Help Center</li>
+                      <li class="nav-link">Returns Product</li>
+                      <li class="nav-link">Recalls</li>
+                      <li class="nav-link">Accessibility</li>
+                      <li class="nav-link">Contact Us</li>
+                      <li class="nav-link">Store Pickup</li>
                     </ul>
                   </div>
                 </div>
@@ -98,12 +97,12 @@
                 <div class="collapse d-lg-block" id="categoryList">
                   <div class="content text-gray">
                     <ul class="list-unstyled fw-medium">
-                      <li>Comedy</li>
-                      <li>Drama</li>
-                      <li>Horror</li>
-                      <li>Kids</li>
-                      <li>Romantic</li>
-                      <li>Comedy</li>
+                      <li class="nav-link">Comedy</li>
+                      <li class="nav-link">Drama</li>
+                      <li class="nav-link">Horror</li>
+                      <li class="nav-link">Kids</li>
+                      <li class="nav-link">Romantic</li>
+                      <li class="nav-link">Comedy</li>
                     </ul>
                   </div>
                 </div>
