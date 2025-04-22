@@ -22,7 +22,7 @@
         background-position: center;   
         }
     </style>
-
+    @yield('css')
 
 </head>
 

@@ -11,6 +11,8 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController; 
 use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\CustomCategoryController; 
+
 
 
 
@@ -51,5 +53,6 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
 
     
 });
+route::get('/custom/category',[CustomCategoryController::class , 'index'])->name('custom.category.index');
 
-
+route::get('/custom/category/{id}',[CustomCategoryController::class,'listproduct'])->name('category.product');

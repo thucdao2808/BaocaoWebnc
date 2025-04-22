@@ -56,10 +56,10 @@
                         <div class="collapse navbar-collapse  justify-content-center" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" aria-current="page" href="#">Trang Chủ</a>
+                                    <a class="nav-link fw-bolder" aria-current="page" href="{{route('home')}}">Trang Chủ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" href="#">Sách</a>
+                                    <a class="nav-link fw-bolder" href="{{route('custom.category.index')}}">Sách</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bolder" href="#">Giới thiệu</a>
