@@ -99,9 +99,9 @@
             <label for="" class="form-label">Giá Tiền</label>
             <input type="number" name="price" class="form-control mb-3" value="{{old('price')}}">
         
-            <label for="" class="form-label">Ảnh khác</label>
-            <input type="file" name="galleries[]" class="form-control mb-3" >
-            <input type="file" name="galleries[]" class="form-control mb-3" >
+            <label for="" class="form-label">Ảnh chi tiết </label>
+            <input type="file" name="galleries[]" class="form-control mb-3" multiple>
+            
 
 
             <input type="submit" value="Thêm sản phẩm" class="btn btn-success   ">

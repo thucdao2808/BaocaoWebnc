@@ -100,9 +100,9 @@
             
             
             
-            <input type="file" name="galleries[]" class="form-control mb-3" >
+            <input type="file" name="galleries[]" class="form-control mb-3" multiple>
             
-            <input type="file" name="galleries[]" class="form-control mb-3" >
+         
 
             <input type="submit" value="Cập nhật sản phẩm" class="btn btn-success">
             

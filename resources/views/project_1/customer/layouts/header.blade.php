@@ -47,7 +47,9 @@
                     </div>
                 </div>
                 <div class="cart_icon font-icon">
-                    <i class="fa-solid fa-cart-shopping fs-5"></i>
+                    <a href="{{route('showCart')}}">
+                        <i class="fa-solid fa-cart-shopping fs-5"></i>
+                    </a>
                 </div>
                 <div class="setting_icon font-icon">
                     <i class="fa-solid fa-gear fs-5"></i>
@@ -66,10 +68,10 @@
                         <div class="collapse navbar-collapse  justify-content-center" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" aria-current="page" href="#">Trang Chủ</a>
+                                    <a class="nav-link fw-bolder" aria-current="page" href="{{route('home')}}">Trang Chủ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" href="#">Sách</a>
+                                    <a class="nav-link fw-bolder" href="{{route('custom.category.index')}}">Sách</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bolder" href="#">Giới thiệu</a>
