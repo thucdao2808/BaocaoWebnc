@@ -7,52 +7,7 @@
 @section('css')
 
 <style>
-    .book-card {
-        border-radius: 15px;
-        overflow: hidden;
-        background-color: #ffffff;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease-in-out;
-        padding: 15px;
-        text-align: center;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    
-    .book-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    
-    .book-card img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .book-card .genre {
-        font-weight: 700;
-        font-size: 1.1rem;
-        color: #333;
-        margin-bottom: 5px;
-    }
-    
-    .book-card .title {
-        font-size: 0.95rem;
-        color: #777;
-        margin-bottom: 10px;
-        min-height: 40px;
-    }
-    
-    .book-card .price {
-        font-size: 1rem;
-        color: #e74c3c;
-        font-weight: bold;
-    }
+
     
 /* Sidebar category links */
 .sidebar .category-filter .nav-link {
@@ -139,21 +94,21 @@
         <div class="row" id="book-list">
           <!-- Book items -->
             @foreach ($products as $product)
-                <div class="col-md-4 mb-4">
-                    <div class="book-card">
-                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="img-fluid">
-                        <div class="genre">{{ $product->name }}</div>
-                        <div class="title">{{ $product->description }}</div>
-                        <div class="price">{{ number_format($product->price) }}đ</div>
+                <div class="card" style="width: 18rem; margin: 5px">
+                    <img class="card-img-top"style="width:100% ; height:200px"  src="{{asset('storage/'.$product->image_path)}}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{$product->name}}</h5>
+                    <p class="card-text">{{$product->description}}</p>
+                    <p class="card-text">{{number_Format($product->price)}}đ</p>
+                    <a href="#" 
+                       class="btn btn-primary  add_to_cart" 
+                       data-url = "{{route('addToCart',['id'=>$product->id])}}"
+                       >
+                        Add To Cart
+                    </a>
                     </div>
                 </div>
             @endforeach
-
-          
-
-          
-
-          
 
           <!-- More cards here... -->
         </div>
@@ -163,6 +118,31 @@
     </div>
   </div>
 
+@endsection
+@section('js')
+<script>
+  function addToCart(event){
+    event.preventDefault();
+     let urlCart  = $(this).data('url');
+     $.ajax({
+            type: "GET",
+            url: urlCart,
+            dataType: 'json',
+            success: function(data){
+                if(data.code === 200 ){
+                    alert('Thêm sản phẩm thành công');
+                } 
+            },
+            error: function(data){
+
+            },
+     });
+  }
+
+  $(function(){
+    $('.add_to_cart').on('click',addToCart);
+  });
+</script>
 @endsection
   
 

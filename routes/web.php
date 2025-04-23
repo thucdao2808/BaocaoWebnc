@@ -12,7 +12,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController; 
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\CustomCategoryController; 
-
+use App\Http\Controllers\ProductCartController;
 
 
 
@@ -20,7 +20,15 @@ use App\Http\Controllers\CustomCategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth',isMember::class])->get('home', [HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth',isMember::class])->prefix('home')->group(function() {
+
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
+});
+
 
 Route::get('/login', [AuthController::class, 'Showform_login'])->name('login');
 Route::get('/register', [AuthController::class, 'Showform_register'])->name('register');
@@ -53,6 +61,24 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
 
     
 });
-route::get('/custom/category',[CustomCategoryController::class , 'index'])->name('custom.category.index');
 
-route::get('/custom/category/{id}',[CustomCategoryController::class,'listproduct'])->name('category.product');
+Route::prefix('custom')->group(function () {
+    
+    // Trang chính của category
+    Route::get('/category', [CustomCategoryController::class, 'index'])->name('custom.category.index');
+
+    // Danh sách sản phẩm theo category
+    Route::get('/category/{id}', [CustomCategoryController::class, 'listproduct'])->name('category.product');
+
+    // Show cart cho user
+    Route::get('/show-CartProducts', [ProductCartController::class, 'index'])->name('showCart');
+
+    // Thêm sản phẩm vào giỏ hàng
+    Route::get('/products/add-to-cart/{id}', [CustomCategoryController::class, 'addToCart'])->name('addToCart');
+
+    // Cập nhật giỏ hàng (AJAX)
+    Route::post('/cart/update', [ProductCartController::class, 'updateCart'])->name('cart.update');
+
+    // Xoá sản phẩm khỏi giỏ hàng (AJAX)
+    Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
+});
