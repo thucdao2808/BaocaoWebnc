@@ -13,6 +13,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\CustomCategoryController; 
 use App\Http\Controllers\ProductCartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -27,6 +29,14 @@ Route::middleware(['auth',isMember::class])->prefix('home')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
+
+    Route::get('checkout/{product}', [CheckoutController::class, 'show'])->name('checkout');
+
+    Route::post('checkout/{product}', [CheckoutController::class, 'checkout'])->name('checkout.handle');
+
+    Route::get('vnpay/return', [CheckoutController::class, 'vnpayReturn'])->name('vnpay.return');
+
+    Route::get('order', [OrderController::class, 'index'])->name('order');
 });
 
 
