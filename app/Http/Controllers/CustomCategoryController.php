@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Cartitem;
 
 
 class CustomCategoryController extends Controller
@@ -43,7 +44,26 @@ class CustomCategoryController extends Controller
                     'description'=>$product->description,
                 ];
         }
+
         session()->put('cart',$cart);
+        if (auth()->check()) {
+            $userId = auth()->id();
+    
+            $cartItem = Cartitem::where('user_id', $userId)
+                            ->where('product_id', $id)
+                            ->first();
+    
+            if ($cartItem) {
+                $cartItem->quantity++;
+                $cartItem->save();
+            } else {
+                    Cartitem::create([
+                    'user_id' => $userId,
+                    'product_id' => $id,
+                    'quantity' => 1,
+                ]);
+            }
+        }
         return response()->json([
                 'code'=>200,
                 'message'=>'success'

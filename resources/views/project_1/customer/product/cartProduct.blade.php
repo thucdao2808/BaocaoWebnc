@@ -53,6 +53,7 @@ top: 13px;
                                         @php
                                           $total = 0;
                                         @endphp
+                                        @if(!empty($carts))
                                         @foreach ($carts as $cartItem )
                                             @php
                                               $total += $cartItem['price']*$cartItem['quantity'];
@@ -68,20 +69,14 @@ top: 13px;
                                                 <h6 class="mb-0">{{$cartItem['description']}}</h6>
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
+                                                
                             
                                                 <input  min="1" name="quantity" value="{{$cartItem['quantity']}}" type="number"
-                                                    class="form-control form-control-sm number_change" 
+                                                    class="form-control form-control-sm number_change" style="width:30px;" 
                                                     data-price="{{$cartItem['price']}}"
                                                     data-id="{{$cartItem['id']}}"/>
                             
-                                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
+                                                
                                                 </div>
                                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                                 <h6 class="mb-0">{{number_Format($cartItem['price'])}} đ</h6>
@@ -97,6 +92,9 @@ top: 13px;
                             
                                             
                                         @endforeach
+                                        @else
+                                          <p>Giỏ hàng của bạn hiện đang trống.</p>
+                                        @endif
                                         <div class="pt-5">
                                           <h6 class="mb-0">
                                             <a href="{{ route('custom.category.index') }}" class="text-body" style="text-decoration: none;">
@@ -143,7 +141,12 @@ top: 13px;
                       
                                         <div class="d-flex justify-content-between mb-5">
                                           <h5 class="text-uppercase">Total price</h5>
-                                          <h5 class="total-price">{{number_Format($total)}}đ</h5>
+                                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h5 class="mb-0 total-price" data-price="{{$total}}">
+                                                {{ number_format($total) }} đ
+                                            </h5>
+                                        </div>
+                                        
                                         </div>
                       
                                         <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block btn-lg"
@@ -167,21 +170,19 @@ top: 13px;
     $(
       
       function(){
-        function numberChange(){
-          let total = 0;
+        function numberChange() {
+            let total = 0;
 
-          $('.number_change').each(function () {
-            let quantity = parseInt($(this).val());
-            let price = parseFloat($(this).data('price'));
+            $('.number_change').each(function () {
+                let quantity = parseInt($(this).val());
+                let price = parseFloat($(this).data('price'));
 
-            total += quantity * price;
+                total += quantity * price;
+            });
+
             const formattedTotal = new Intl.NumberFormat('vi-VN').format(total) + ' đ';
-
             $('h5.total-price, h5.total-price-sidebar').text(formattedTotal);
-          });
-
-
-      }
+        }
       $(document).on('change', '.number_change',numberChange);
 
       $(document).on('change', '.number_change', function () {
@@ -230,7 +231,7 @@ top: 13px;
     }
 
     $(document).on('click','.cart_delete',cartDelete);
-    numberChange(); 
+    
       }
 
 
