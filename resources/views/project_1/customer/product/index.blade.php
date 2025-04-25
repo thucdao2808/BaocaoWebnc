@@ -63,7 +63,7 @@
                         <span class="fs-5 fw-medium text-gray">{{$product->description}}</span>
                     </div>
                     <div class="action my-3">
-                        <form action="" method="get" class="d-flex">
+                        <form action="{{route('checkout', $product)}}" method="get" class="d-flex">
                             <input class="quantity me-3" type="number" name="quantity" id="" value="1" min="1"> 
                             <button class="btn btn-dark">Thanh toán</button>
                         </form>
