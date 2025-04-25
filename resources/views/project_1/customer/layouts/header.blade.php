@@ -36,11 +36,14 @@
                 <div class="user_icon font-icon">
                     <div class="noti__item js-item-menu">
                         <i class="fa-solid fa-user"  data-bs-toggle="dropdown" aria-expanded="true"></i>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu p-3">
+                            <li>
+                                <a class="nav-link" href="{{route('order')}}">Đơn hàng</a>
+                            </li>
                             <li>
                                 <form action="{{route('logout')}}" method="POST">
                                     @csrf
-                                    <button type="submit">Đăng xuất</button>
+                                    <button class="nav-link btn p-0" type="submit">Đăng xuất</button>
                                 </form>
                             </li>
                         </ul>
