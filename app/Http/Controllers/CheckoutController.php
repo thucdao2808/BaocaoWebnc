@@ -146,7 +146,11 @@ class CheckoutController extends Controller
 
             return view('project_1.customer.checkout.success',compact('order'));
         } else {
-            return redirect()->route('home')->with('error', 'Thanh toán thất bại!');
+            $orderId = explode('-', $request->vnp_TxnRef)[0];
+            $order = Order::find($orderId);
+            $order->status = 'Thanh toán thất bại';
+            $order->save();
+            return view('project_1.customer.checkout.error');
         }
     }
 }

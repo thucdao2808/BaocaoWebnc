@@ -15,7 +15,8 @@ class HomeController extends Controller
     public function index() {
         $banners = Banner::query()->get();
         $products_best = Product::where('quantity', '<', 10)->get();
-        return view('project_1.customer.home', compact('banners', 'products_best'));
+        $product_sell = Product::latest()->take(5)->get();
+        return view('project_1.customer.home', compact('banners', 'products_best', 'product_sell'));
     }
 
     public function show(Product $product) {
