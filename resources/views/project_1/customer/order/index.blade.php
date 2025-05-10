@@ -44,7 +44,7 @@
                         <span class="fs-5 fw-medium text-danger">{{number_format($order->total_price)}} đ</span>
                     </div>
                     <div class="text-end my-3">
-                        <a href="" class="btn btn-danger">Mua lại</a>
+                        <a href="{{route('product', $order->item->product)}}" class="btn btn-danger">Mua lại</a>
                         <a href="" class="btn border">Liên hệ người bán</a>
                     </div>
                 </div>

@@ -53,9 +53,9 @@
                         </div>
                         <div class="product-content p-2 ">
                             <div class="category">
-                                <span class="text-gray fw-medium ">{{$product->category->name}}</span>
+                                <span class="text-gray fw-medium" >{{$product->category->name}}</span>
                             </div>
-                            <h3 class="fs-6">{{$product->name}}</h3>
+                            <h3 class="fs-6 text-truncate" >{{$product->name}}</h3>
                             <div class="rank d-flex">
                                 <i class="fa-regular fa-star"></i>
                                 <i class="fa-regular fa-star"></i>
@@ -64,7 +64,7 @@
                                 <i class="fa-regular fa-star"></i>
                             </div>
                             <div class="product-price">
-                                <span class="text-danger fw-medium">{{$product->price}}</span>
+                                <span class="text-danger fw-medium">{{number_format($product->price)}}đ</span>
                             </div>
                         </div>
                     </a>
@@ -97,16 +97,17 @@
             </div>
 
             <div class="col-12 col-md-4 d-inline-block">
-                <div class="product-item mb-3 py-2 border-1 border-bottom border-dark-subtle">
+                @foreach ($product_sell as $product)
+                    <div class="product-item mb-3 py-2 border-1 border-bottom border-dark-subtle">
                     <a href="" class="d-flex text-decoration-none text-dark">
                         <div class="col-3 col-md-6 col-lg-4 me-3">
                             <div class="image">
-                                <img src="{{asset('images/hummingbird-printed-t-shirt.jpg')}}" alt="" class="img-fluid rounded-3">
+                                <img src="{{asset(Storage::url($product->image_path))}}" alt="" class="img-fluid rounded-3">
                             </div>
                         </div>
                         <div class="col-10 col-md-8 py-3">
-                            <div class="category text-gray fw-medium ">Fantasy</div>
-                            <h5 class="fs-5 my-2">They Both Die at the die</h5>
+                            <div class="category text-gray fw-medium ">{{$product->category->name}}</div>
+                            <h5 class="fs-5 my-2">{{$product->name}}</h5>
                             <div class="rank d-flex my-3">
                                 <i class="fa-regular fa-star"></i>
                                 <i class="fa-regular fa-star"></i>
@@ -115,11 +116,13 @@
                                 <i class="fa-regular fa-star"></i>
                             </div>
                             <div class="product-price">
-                                <span class="fw-medium text-danger fs-5">$28</span>
+                                <span class="fw-medium text-danger fs-5">{{number_format($product->price)}}đ</span>
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> 
+                @endforeach
+              
             
             </div>
             

@@ -34,17 +34,17 @@
                         <div class="information p-3 border  shadow">
                             <p class="fs-4 fw-medium text-center">Thông tin khách hàng</p>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name" id="fullname" placeholder="Họ và tên">
+                                <input type="text" class="form-control" name="name" id="fullname" placeholder="Họ và tên" value="{{old('name')}}">
                                 <label for="fullname">Họ và tên</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email">
+                                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email" value="{{old('email')}}">
                                 <label for="floatingInput">Email</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Số điện thoại">
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" value="{{old('phone')}}">
                                 <label for="phone">Số điện thoại</label>
                             </div>
 
@@ -60,11 +60,11 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             Sản phẩm
                                         </button>
                                     </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="row">
                                                 <div class="col-3">

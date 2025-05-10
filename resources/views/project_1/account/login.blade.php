@@ -67,7 +67,18 @@
                         <span>Bạn chưa có tài khoản?</span>
                         <a class="mx-2" href="{{route('register')}}">Đăng ký</a>
                     </div>
+
                 </form>
+                <a href="{{route('google')}}" class="text-decoration-none">
+                    <div class="google_login d-flex border border-dark-subtle p-2 rounded-3 mt-3 align-items-center justify-content-center">
+                        <div class="gg_img col-1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-3">
+                            <span class="text-dark">Đăng nhập bằng Google</span>
+                        </div>
+                    </div>
+                </a>
             </div>
           </div>
         </div>

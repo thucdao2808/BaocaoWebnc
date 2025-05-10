@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomCategoryController;
 use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\GoogleController;
 
 
 
@@ -47,6 +48,11 @@ Route::post('/login', [AuthController::class, 'handle_login']);
 Route::post('/register', [AuthController::class, 'handle_register']);
 
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware('web')->group(function () {
+    Route::get('google', [GoogleController::class, 'redirect'])->name('google');
+    Route::get('google/callback', [GoogleController::class, 'callback']);
+});
 
 Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
 
