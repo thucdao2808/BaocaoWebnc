@@ -29,10 +29,10 @@ Route::middleware(['auth',isMember::class])->prefix('home')->group(function() {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
-    Route::get('/edit',[CustomCategoryController::class,'editInformation'])->name('customer.editInformation');
-    Route::post('/update', [CustomCategoryController::class, 'updateInformation'])->name('customer.updateInformation');
-    Route::get('/editpassword',[CustomCategoryController::class,'editPassword'])->name('customer.editPassword');
-    Route::post('/updatepassword',[CustomCategoryController::class,'updatePassword'])->name('customer.updatePassword');
+    Route::get('/edit',[HomeController::class,'editInformation'])->name('customer.editInformation');
+    Route::post('/update', [HomeController::class, 'updateInformation'])->name('customer.updateInformation');
+    Route::get('/editpassword',[HomeController::class,'editPassword'])->name('customer.editPassword');
+    Route::post('/updatepassword',[HomeController::class,'updatePassword'])->name('customer.updatePassword');
 
 
     Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
