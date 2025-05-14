@@ -91,27 +91,49 @@
             </select>
           </div>
         </div>
-        <div class="row" id="book-list">
-          <!-- Book items -->
-            @foreach ($products as $product)
-                <div class="card" style="width: 18rem; margin: 5px">
-                    <img class="card-img-top"style="width:100% ; height:200px"  src="{{asset('storage/'.$product->image_path)}}" alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title">{{$product->name}}</h5>
-                    <p class="card-text">{{$product->description}}</p>
-                    <p class="card-text">{{number_Format($product->price)}}đ</p>
-                    <a href="#" 
-                       class="btn btn-primary  add_to_cart" 
-                       data-url = "{{route('addToCart',['id'=>$product->id])}}"
-                       >
-                        Add To Cart
-                    </a>
-                    </div>
-                </div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+              <!-- sản phẩm -->
+          
+             @foreach ($products as $product)
+            <div class="swiper-slide py-4" >
+              <!-- Nội dung sản phẩm -->
+              <div class="product-meta rounded-3">
+                  <a class="product text-decoration-none text-dark" href="{{route('product', $product)}}">
+                      <div class="product-img">
+                          <img src="{{asset(Storage::url($product->image_path))}}" alt="" class="img-fluid rounded-3"> 
+                      </div>
+                      <div class="product-content p-2 ">
+                          <div class="category">
+                              <span class="text-gray fw-medium" >{{$product->category->name}}</span>
+                          </div>
+                          <h3 class="fs-6 text-truncate" >{{$product->name}}</h3>
+                          <div class="rank d-flex">
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                          </div>
+                          <div class="product-price">
+                              <span class="text-danger fw-medium">{{number_format($product->price)}}đ</span>
+                          </div>
+                          <a href="#" 
+                            class="btn btn-primary  add_to_cart" 
+                            data-url = "{{route('addToCart',['id'=>$product->id])}}"
+                            >
+                              Add To Cart
+                          </a>
+                      </div>
+                  </a>
+              </div>
+            </div>
             @endforeach
-
-          <!-- More cards here... -->
-        </div>
+          
+            <!-- ... -->
+          </div>
+      </div>
+        
         {{$products->links()}}
       </div>
       

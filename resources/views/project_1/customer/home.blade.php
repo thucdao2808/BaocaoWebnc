@@ -66,6 +66,12 @@
                             <div class="product-price">
                                 <span class="text-danger fw-medium">{{number_format($product->price)}}đ</span>
                             </div>
+                            <a href="#" 
+                            class="btn btn-primary  add_to_cart" 
+                            data-url = "{{route('addToCart',['id'=>$product->id])}}"
+                            >
+                              Add To Cart
+                          </a>
                         </div>
                     </a>
                 </div>
