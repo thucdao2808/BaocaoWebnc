@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cartitem;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Support\Facades\Hash; 
 
 
 class CustomCategoryController extends Controller
@@ -70,5 +74,7 @@ class CustomCategoryController extends Controller
 
         ],200);
     }
+    
+    
     
 }

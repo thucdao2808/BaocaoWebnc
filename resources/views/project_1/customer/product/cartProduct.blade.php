@@ -72,7 +72,7 @@ top: 13px;
                                                 
                             
                                                 <input  min="1" name="quantity" value="{{$cartItem['quantity']}}" type="number"
-                                                    class="form-control form-control-sm number_change" style="width:30px;" 
+                                                    class="form-control form-control-sm number_change" style="width:80px;" 
                                                     data-price="{{$cartItem['price']}}"
                                                     data-id="{{$cartItem['id']}}"/>
                             
