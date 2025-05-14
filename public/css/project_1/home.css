@@ -32,7 +32,14 @@
 }
 
 .product-img {
-    height: 380px; /* mobile mặc định */
+    height: 340px; /* mobile mặc định */
+}
+
+@media (min-width: 576px) {
+.product-img {
+    height: 380px; /* tablet trở lên */
+    overflow: hidden;
+}
 }
 
 @media (min-width: 768px) {
@@ -56,4 +63,28 @@
 
 .quantity {
     width: 60px;
+}
+
+.product-name:hover {
+    color: red;
+}
+.two-line-truncate {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+}
+.four-line-truncate {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+}
+
+.bg-light-pink {
+    background-color:  rgb(233, 233, 233) ;
 }

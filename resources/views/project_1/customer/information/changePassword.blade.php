@@ -26,7 +26,7 @@
     </div>
     @endif
 
-    <form action="{{route('customer.updatePassword')}}" method="POST" style="width:60%">
+    <form action="{{route('updatePassword')}}" method="POST" style="width:60%">
         <!-- Laravel CSRF Token nếu dùng Blade -->
         @csrf
         

@@ -18,7 +18,7 @@ class CustomCategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::latest()->paginate(4);
+        $products = Product::latest()->paginate(8);
         return view('project_1.customer.category', compact('categories', 'products'));
     }
 

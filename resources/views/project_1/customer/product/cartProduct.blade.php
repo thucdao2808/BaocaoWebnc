@@ -10,21 +10,21 @@
 
     <style>
         @media (min-width: 1025px) {
-.h-custom {
-height: 100vh !important;
-}
-}
+        .h-custom {
+        height: 100vh !important;
+        }
+        }
 
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-font-size: 1rem;
-line-height: 2.15;
-padding-left: .75em;
-padding-right: .75em;
-}
+        .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+        }
 
-.card-registration .select-arrow {
-top: 13px;
-}
+        .card-registration .select-arrow {
+        top: 13px;
+        }
     </style>
 </head>
 

@@ -3,7 +3,7 @@
 @section('content')
     <main>
         <section>
-            <div class="bg-dark-subtle p-3 d-flex justify-content-center">
+            <div class="bg-light-pink p-3 d-flex justify-content-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                       <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-gray">Home</a></li>
@@ -83,7 +83,7 @@
                   </h2>
                   <div id="descCollapse" class="accordion-collapse collapse show">
                     <div class="accordion-body">
-                      Symbol of lightness and delicacy, the hummingbird evokes curiosity and joy...
+                       <span class="fw-medium text-gray ">{{ $product->description }}</span>
                     </div>
                   </div>
                 </div>

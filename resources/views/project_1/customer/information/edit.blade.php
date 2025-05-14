@@ -10,58 +10,7 @@
   <!-- Font Awesome for icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 
-  <style>
-    body {
-      background: #f5f5f5;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .profile-container {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 30px;
-      margin-top: 50px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #BA68C8;
-    }
-
-    .profile-name {
-      font-weight: bold;
-      font-size: 18px;
-      margin-top: 10px;
-    }
-
-    .profile-email {
-      font-size: 14px;
-      color: #666;
-    }
-
-    .profile-button {
-      background: #BA68C8;
-      border: none;
-    }
-
-    .profile-button:hover {
-      background: #682773;
-    }
-
-    .form-label {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .back:hover {
-      color: #682773;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="{{asset('css/project_1/profile.css')}}">
 </head>
 <body>
 
@@ -69,7 +18,7 @@
   <div class="row">
     <!-- Left Column: Profile Info -->
     <div class="col-md-4 text-center border-right">
-      <img class="profile-img mt-3" src="{{asset('/storage/'.Auth::user()->avatar)}}" alt="Avatar">
+      <img class="profile-img mt-3" src="{{Storage::disk('public')->exists(Auth::user()->avatar) ? asset(Storage::url(Auth::user()->avatar)) : Auth::user()->avatar }}" alt="Avatar">
       <div class="profile-name">{{Auth::user()->username}}</div>
       <div class="profile-email">{{Auth::user()->email}}</div>
       <div class="text-muted mt-1">United States</div>
@@ -85,7 +34,7 @@
         <h5 class="mb-0">Edit Profile</h5>
       </div>
 
-      <form method="POST" action="{{route('customer.updateInformation')}}" enctype="multipart/form-data">
+      <form method="POST" action="{{route('updateInformation')}}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label class="form-label">Chọn ảnh</label>
