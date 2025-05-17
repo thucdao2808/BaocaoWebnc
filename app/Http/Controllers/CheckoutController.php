@@ -10,44 +10,82 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Cartitem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 
 class CheckoutController extends Controller
 {
-    public function show(Product $product, Request $request) {
-        $quantity = $request->quantity;
-        $total_price = $request->quantity*$product->price;
-        return view('project_1.customer.checkout.index', compact('product', 'quantity','total_price'));
+    public function show(Request $request) {
+        if ($request->has('cart_id')) {
+            $cart_ids = $request->cart_id; // lấy từ request
+            $cart_items = Cartitem::whereIn('id', $cart_ids)->get();
+
+            $total_price = 0;
+            foreach ($cart_items as $item) {
+                $total_price += $item->product->price * $item->quantity;
+            }
+
+            return view('project_1.customer.checkout.index', compact('cart_items', 'total_price'));
+
+        }elseif($request->has('product_id')) {
+            $product = Product::find($request->product_id);
+            $quantity = $request->quantity;
+            $total_price = $request->quantity*$product->price;
+            return view('project_1.customer.checkout.index', compact('product', 'quantity','total_price'));
+
+        }
+        
     }
 
-    public function checkout(CheckoutRequest $request, Product $product) {
+    public function checkout(CheckoutRequest $request) {
 
-        $order = new Order;
-        try {
-            
-            DB::transaction(function () use($request, &$order, $product) {
-                $order = Order::create([
-                    'user_id'       =>  Auth::user()->id,
-                    'name'          =>  $request->name,
-                    'phone'         =>  $request->phone,
-                    'email'         =>  $request->email,
-                    'address'       =>  $request->address,
-                    'status'        =>  'Chưa thanh toán',
-                    'total_price'   =>  $request->total_price
-                ]);
-    
+          $order = new Order;
+
+    try {
+        DB::transaction(function () use ($request, &$order) {
+            $order = Order::create([
+                'user_id'       => Auth::user()->id,
+                'name'          => $request->name,
+                'phone'         => $request->phone,
+                'email'         => $request->email,
+                'address'       => $request->address,
+                'status'        => 'Chưa thanh toán',
+                'total_price'   => $request->total_price
+            ]);
+
+            if ($request->has('cart_id')) {
+                $cart_ids = $request->cart_id;
+                $cart_items = Cartitem::whereIn('id', $cart_ids)->get();
+
+                foreach ($cart_items as $item) {
+                    OrderItem::create([
+                        'order_id'      => $order->id,
+                        'product_id'    => $item->product_id,
+                        'product_name'  => $item->product->name,
+                        'price'         => $item->product->price,
+                        'quantity'      => $item->quantity,
+                        'total_price'   => $item->product->price * $item->quantity
+                    ]);
+                }
+
+                Cartitem::destroy($cart_ids);
+
+            } elseif ($request->has('product_id')) {
+                $product = Product::findOrFail($request->product_id);
+
                 OrderItem::create([
-                    'order_id'      =>  $order->id,
-                    'product_id'    =>  $product->id,
-                    'product_name'  =>  $product->name,
-                    'price'         =>  $product->price,
-                    'quantity'      =>  $request->quantity,
-                    'total_price'   =>  $request->total_price
+                    'order_id'      => $order->id,
+                    'product_id'    => $product->id,
+                    'product_name'  => $product->name,
+                    'price'         => $product->price,
+                    'quantity'      => $request->quantity,
+                    'total_price'   => $product->price * $request->quantity,
+                    'expired_at'    => Carbon::now()->addMinutes(15) 
                 ]);
-    
-            });
+            }
+        });
 
             return $this->vnpayShow($order);
         } catch (\Throwable $th) {
@@ -109,7 +147,6 @@ class CheckoutController extends Controller
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-
         return redirect($vnp_Url);
     }
 

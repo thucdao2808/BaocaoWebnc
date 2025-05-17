@@ -38,7 +38,7 @@ class ProductCartController extends Controller
             // Cập nhật vào session nếu cần đồng bộ
             session()->put('cart', $cartItems);
             session()->get('cart');
-        return view('project_1.customer.product.cartProduct');
+        return view('project_1.customer.product.cartProduct', compact('cartDb'));
         }
         
     }

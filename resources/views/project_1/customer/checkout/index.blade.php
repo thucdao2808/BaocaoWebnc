@@ -25,10 +25,18 @@
                 </div>
             @endif
 
-            <form action="{{route('checkout.handle', $product)}}" method="post">
+            <form action="{{route('checkout.handle')}}" method="post">
                 @csrf
-                <input type="hidden" name="quantity" value="{{$quantity}}">
-                <input type="hidden" name="total_price" value="{{$total_price}}">
+                @if (isset($product))
+                    <input type="hidden" name="quantity" value="{{$quantity}}">
+                    <input type="hidden" name="total_price" value="{{$total_price}}">
+                @elseif (isset($cart_items))
+                    @foreach ($cart_items as $item)
+                        <input type="hidden" name="cart_id[]" value="{{$item->id}}">
+                    @endforeach
+                    <input type="hidden" name="total_price" value="{{$total_price}}">
+                @endif
+               
                 <div class="row">
                     <div class="col-7">
                         <div class="information p-3 border  shadow">
@@ -66,6 +74,31 @@
                                     </h2>
                                     <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
+                                            @if (isset($cart_items))
+                                                 @foreach($cart_items as $item)
+                                                    <div class="row mb-3">
+                                                        <div class="col-3">
+                                                            <div class="image">
+                                                                <img src="{{ asset(Storage::url($item->product->image_path)) }}" alt="" class="img-fluid">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <div>
+                                                                <div class="name">
+                                                                    <span>{{ $item->product->name }}</span>
+                                                                </div>
+                                                                <div class="sl">
+                                                                    <span>Số lượng: {{ $item->quantity }}</span>
+                                                                </div>
+                                                                <div class="price">
+                                                                    <span>Giá :</span>
+                                                                    <span class="text-danger">{{ number_format($item->product->price) }} đ</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @elseif(isset($product))
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="image">
@@ -87,6 +120,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endif
+                                            
                                         </div>
                                     </div>
                                 </div>

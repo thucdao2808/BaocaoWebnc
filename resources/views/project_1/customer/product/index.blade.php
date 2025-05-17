@@ -15,7 +15,7 @@
         </section>
         <div class="container py-5">
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     <div class="row">
                         <div class="col-2 pe-0">
                             <div class="bg-dark text-white text-center py-2" role="button" onclick="scrollUp()">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 px-5">
+                <div class="col-md-6 px-5">
                     <div class="name_product">
                         <span class="fs-1 fw-bold">{{$product->name}}</span>
                     </div>
@@ -54,18 +54,32 @@
                             </a></li>
                         </ul>
                     </div>
-                    
+
+                    <div class="tags">
+                        @foreach ($product->tags as $tag)
+                            <span class="fs-6 fw-medium text-light badge bg-warning my-3">{{$tag->name}}</span>
+                        @endforeach
+                    </div>
+
                     <div class="price my-3">
                         <span class="fs-4 fw-medium text-danger">{{$product->price}}</span>
                         <span class="fs-4 fw-medium text-danger">đ</span>
                     </div>
-                    <div class="description">
-                        <span class="fs-5 fw-medium text-gray">{{$product->description}}</span>
-                    </div>
+                    
                     <div class="action my-3">
-                        <form action="{{route('checkout', $product)}}" method="get" class="d-flex">
-                            <input class="quantity me-3" type="number" name="quantity" id="" value="1" min="1"> 
-                            <button class="btn btn-dark">Thanh toán</button>
+                        <form action="{{route('checkout')}}" method="get" >
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <div class="d-flex">
+                                <label for="quantity" class="form-label me-3">Số lượng</label>
+                                <input class="quantity" type="number" name="quantity" id="" value="1" min="1"> 
+                            </div>
+
+                            <div class="option mt-3">
+                                <button type="submit" class="btn btn-dark pay">Mua luôn</button>
+                                <a href="#" class="btn border border-2 border-black add_to_cart" id="add_to_cart" data-url = "{{route('addToCart',['id'=>$product->id])}}">Thêm vào giỏ hàng</a>
+                            </div>
+                   
                         </form>
                     </div>
                 </div>
@@ -122,4 +136,29 @@
 
 
     </main>    
+@endsection
+@section('js')
+<script>
+  function addToCart(event){
+    event.preventDefault();
+     let urlCart  = $(this).data('url');
+     $.ajax({
+            type: "GET",
+            url: urlCart,
+            dataType: 'json',
+            success: function(data){
+                if(data.code === 200 ){
+                    alert('Thêm sản phẩm thành công');
+                } 
+            },
+            error: function(data){
+
+            },
+     });
+  }
+
+  $(function(){
+    $('#add_to_cart').on('click',addToCart);
+  });
+</script>
 @endsection

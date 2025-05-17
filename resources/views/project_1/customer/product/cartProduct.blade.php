@@ -30,136 +30,127 @@
 
 <body>
     <div class="cart">
-         
         @php
             $carts = session()->get('cart');
-            
         @endphp
 
         <section class="h-100 h-custom" style="background-color: #d2c9ff;">
-                        <div class="container py-5 h-100">
-                          <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col-12">
-                              <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-                                <div class="card-body p-0">
-                                  <div class="row g-0">
-                                    <div class="col-lg-8">
-                                      <div class="p-5">
-                                        <div class="d-flex justify-content-between align-items-center mb-5">
-                                          <h1 class="fw-bold mb-0">Shopping Cart</h1>
-                                          <h6 class="mb-0 text-muted">{{count($carts)}} items</h6>
-                                        </div>
-                                        <hr class="my-4">
-                                        @php
-                                          $total = 0;
-                                        @endphp
-                                        @if(!empty($carts))
-                                        @foreach ($carts as $cartItem )
-                                            @php
-                                              $total += $cartItem['price']*$cartItem['quantity'];
-                                            @endphp
-                                            <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                <div class="col-md-2 col-lg-2 col-xl-2">
-                                                <img
-                                                    src="{{asset('/storage/'.$cartItem['image_path'])}}"
-                                                    class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                </div>
-                                                <div class="col-md-3 col-lg-3 col-xl-3">
-                                                <h6 class="text-muted">{{$cartItem['name']}}</h6>
-                                                <h6 class="mb-0">{{$cartItem['description']}}</h6>
-                                                </div>
-                                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                
-                            
-                                                <input  min="1" name="quantity" value="{{$cartItem['quantity']}}" type="number"
-                                                    class="form-control form-control-sm number_change" style="width:80px;" 
-                                                    data-price="{{$cartItem['price']}}"
-                                                    data-id="{{$cartItem['id']}}"/>
-                            
-                                                
-                                                </div>
-                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                <h6 class="mb-0">{{number_Format($cartItem['price'])}} đ</h6>
-                                                </div>
-                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                                <a href="" class="btn btn-danger cart_delete" 
-                                                   data-url ="{{route('cart.delete')}}"
-                                                   data-id="{{$cartItem['id']}}">Xóa</a>
-                                                </div>
-                                                <hr class="my-4"> 
-                                            </div>
-                            
-                                            
-                                        @endforeach
-                                        @else
-                                          <p>Giỏ hàng của bạn hiện đang trống.</p>
-                                        @endif
-                                        <div class="pt-5">
-                                          <h6 class="mb-0">
-                                            <a href="{{ route('custom.category.index') }}" class="text-body" style="text-decoration: none;">
-                                              <i class="fa-solid fa-arrow-left me-2"></i>Back to shop
-                                            </a>
-                                          </h6>
-                                        </div>
-                                        
-                      
-               
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-4 bg-body-tertiary">
-                                      <div class="p-5">
-                                        <h3 class="fw-bold mb-5 mt-2 pt-1">Tổng tiền </h3>
-                                        <hr class="my-4">
-                      
-                                        <div class="d-flex justify-content-between mb-4">
-                                          <h5 class="text-uppercase">items 3</h5>
-                                          <h5 class="total-price-sidebar">{{number_Format($total)}}đ</h5>
-                                        </div>
-                      
-                                        <h5 class="text-uppercase mb-3">Shipping</h5>
-                      
-                                        <div class="mb-4 pb-2">
-                                          <select data-mdb-select-init>
-                                            <option value="1">Standard-Delivery- €5.00</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="4">Four</option>
-                                          </select>
-                                        </div>
-                      
-                                        <h5 class="text-uppercase mb-3">Give code</h5>
-                      
-                                        <div class="mb-5">
-                                          <div data-mdb-input-init class="form-outline">
-                                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Examplea2">Enter your code</label>
-                                          </div>
-                                        </div>
-                      
-                                        <hr class="my-4">
-                      
-                                        <div class="d-flex justify-content-between mb-5">
-                                          <h5 class="text-uppercase">Total price</h5>
-                                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <h5 class="mb-0 total-price" data-price="{{$total}}">
-                                                {{ number_format($total) }} đ
-                                            </h5>
-                                        </div>
-                                        
-                                        </div>
-                      
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block btn-lg"
-                                          data-mdb-ripple-color="dark">Register</button>
-                      
-                                      </div>
-                                    </div>
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-12">
+                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                  <div class="card-body p-0">
+                    <div class="row g-0">
+                      <div class="col-lg-8">
+                        <div class="p-5">
+                          <div class="d-flex justify-content-between align-items-center mb-5">
+                            <h1 class="fw-bold mb-0">Shopping Cart</h1>
+                            <h6 class="mb-0 text-muted">{{count($carts)}} items</h6>
+                          </div>
+                          <hr class="my-4">
+                          @php
+                            $total = 0;
+                          @endphp
+                          @if(!empty($carts))
+                          @foreach ($carts as $cartItem )
+                              @php
+                                $total += $cartItem['price']*$cartItem['quantity'];
+                              @endphp
+                              <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                  <div class="col-md-2 col-lg-2 col-xl-2">
+                                  <img
+                                      src="{{asset('/storage/'.$cartItem['image_path'])}}"
+                                      class="img-fluid rounded-3" alt="Cotton T-shirt">
                                   </div>
-                                </div>
+                                  <div class="col-md-3 col-lg-3 col-xl-3">
+                                  <h6 class="text-uppercase mb-0">{{$cartItem['name']}}</h6>
+
+                                  </div>
+                                  <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                  
+              
+                                  <input  min="1" name="quantity" value="{{$cartItem['quantity']}}" type="number"
+                                      class="form-control form-control-sm number_change" style="width:80px;" 
+                                      data-price="{{$cartItem['price']}}"
+                                      data-id="{{$cartItem['id']}}"/>
+              
+                                  
+                                  </div>
+                                  <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                  <h6 class="mb-0">{{number_Format($cartItem['price'])}} đ</h6>
+                                  </div>
+                                  <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                  <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                                  <a href="" class="btn btn-danger cart_delete" 
+                                      data-url ="{{route('cart.delete')}}"
+                                      data-id="{{$cartItem['id']}}">Xóa</a>
+                                  </div>
+                                  <hr class="my-4"> 
                               </div>
-                            </div>
+                          @endforeach
+                          @else
+                            <p>Giỏ hàng của bạn hiện đang trống.</p>
+                          @endif
+                          <div class="pt-5">
+                            <h6 class="mb-0">
+                              <a href="{{ route('custom.category.index') }}" class="text-body" style="text-decoration: none;">
+                                <i class="fa-solid fa-arrow-left me-2"></i>Back to shop
+                              </a>
+                            </h6>
                           </div>
                         </div>
+                      </div>
+                      <div class="col-lg-4 bg-body-tertiary">
+                        <div class="p-5">
+                          <h3 class="fw-bold mb-5 mt-2 pt-1">Tổng tiền </h3>
+                          <hr class="my-4">
+        
+                          <div class="d-flex justify-content-between mb-4">
+                            <h5 class="text-uppercase">items </h5>
+                            <h5 class="total-price-sidebar">{{number_Format($total)}}đ</h5>
+                          </div>
+        
+                          <h5 class="text-uppercase mb-3">Shipping</h5>
+        
+                          <div class="mb-4 pb-2">
+                            <select data-mdb-select-init>
+                              <option value="1">Standard-Delivery- €5.00</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                              <option value="4">Four</option>
+                            </select>
+                          </div>
+        
+                          <h5 class="text-uppercase mb-3">Give code</h5>
+        
+        
+                          <hr class="my-4">
+        
+                          <div class="d-flex justify-content-between mb-5">
+                            <h5 class="text-uppercase">Total price</h5>
+                            <div class="">
+                              <span class="mb-0 total-price text-danger fw-medium" data-price="{{$total}}">
+                                  {{ number_format($total) }} đ
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <form action="{{route('checkout')}}" method="get">
+                            @foreach ($cartDb as $item)
+                              <input type="hidden" name="cart_id[]" value="{{$item->id}}">
+                            @endforeach
+                            <button  type="submit" class="btn btn-dark btn-block btn-lg">Thanh toán</button>
+
+                          </form>
+        
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
          </section>
     </div>
     

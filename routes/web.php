@@ -34,9 +34,9 @@ Route::prefix('home')->group(function() {
         
         Route::post('/updatepassword',[HomeController::class,'updatePassword'])->name('updatePassword');
 
-        Route::get('checkout/{product}', [CheckoutController::class, 'show'])->name('checkout');
+        Route::get('checkout', [CheckoutController::class, 'show'])->name('checkout');
 
-        Route::post('checkout/{product}', [CheckoutController::class, 'checkout'])->name('checkout.handle');
+        Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.handle');
 
         Route::get('vnpay/return', [CheckoutController::class, 'vnpayReturn'])->name('vnpay.return');
 

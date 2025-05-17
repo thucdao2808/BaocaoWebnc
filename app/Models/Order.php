@@ -18,9 +18,9 @@ class Order extends Model
     ];
 
     // Một đơn hàng có nhiều sản phẩm (order items)
-    public function item()
+    public function items()
     {
-        return $this->hasOne(OrderItem::class);
+        return $this->hasMany(OrderItem::class);
     }
 
     // Nếu có liên kết với người dùng

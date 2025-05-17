@@ -29,9 +29,7 @@ class CustomCategoryController extends Controller
             return view('project_1.customer.category',compact('categories','products'));
     }
     public function addToCart($id){
-        // session()->forget('cart');
-        // dd('end');
-
+      
         $product =Product::find($id);
         $cart = session()->get('cart');
         if(isset($cart[$id])){
