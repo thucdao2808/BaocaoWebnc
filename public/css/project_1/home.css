@@ -88,3 +88,9 @@
 .bg-light-pink {
     background-color:  rgb(233, 233, 233) ;
 }
+
+.add_to_cart:hover {
+    color: #fff !important;
+    background-color: #000000 !important;
+}
+

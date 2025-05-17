@@ -1,7 +1,5 @@
 <?php
 
-
-
  function getConfigValueFromSettingTable($configKey){
 
     $setting = \App\Models\Setting::where('name',$configKey)->first();
