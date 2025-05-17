@@ -17,8 +17,8 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SettingController;
-
-
+use App\Http\Controllers\HelpPageController;
+use App\Http\Controllers\AboutPageController;
 
 
 Route::prefix('home')->group(function() {
@@ -53,7 +53,10 @@ Route::prefix('home')->group(function() {
 
         // Xoá sản phẩm khỏi giỏ hàng (AJAX)
         Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
-
+        //Trang liên hệ
+         Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
+          Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
+        
     });
     
     Route::get('product/{product}', [HomeController::class, 'show'])->name('product');

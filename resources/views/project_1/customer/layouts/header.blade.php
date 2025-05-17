@@ -1,7 +1,7 @@
 <header>
     <div class="p-3 bg-warning">
         <span class="fs-6">Can we help you?</span>
-        <span class="fs-6 ">{{getConfigValueFromSettingTable('số điện thoại')}}</span>
+        <span class="fs-6 ">{{getConfigValueFromSettingTable('phone')}}</span>
     </div>
     <div class="container">
         <div class="d-flex flex-wrap align-items-start justify-content-between py-3 my-3">
@@ -120,13 +120,13 @@
                                     <a class="nav-link fw-bolder" href="{{route('custom.category.index')}}">Sách</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" href="#">Giới thiệu</a>
+                                    <a class="nav-link fw-bolder" href="{{route('about.index')}}">Giới thiệu</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bolder" href="#">Tin tức</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" href="#">Liên hệ</a>
+                                    <a class="nav-link fw-bolder" href="{{route('helppage.index')}}">Liên hệ</a>
                                 </li>
 
                             </ul>
