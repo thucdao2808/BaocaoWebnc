@@ -34,68 +34,66 @@
             <div
                 class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-4 d-flex justify-content-around align-items-center order-2">
                 <div class="user_icon font-icon">
-                    <div class="noti__item dropdown">
-                        <i class="fa-solid fa-user" data-bs-toggle="dropdown" aria-expanded="false" role="button"></i>
-                
-                        <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 350px;">
-                
-                            
-                
-                            
-                
-                            <!-- Thông tin người dùng -->
-                            <form action="">
+                    @guest
+                        <div>
+                            <a class="text-decoration-none fs-6 text-danger" href="{{route('login')}}" >Đăng Nhâp</a>
+                        </div>
+                    @endguest
+                    @auth
+                        <div class="noti__item dropdown">
+                            <i class="fa-solid fa-user" data-bs-toggle="dropdown" aria-expanded="false" role="button"></i>
+                    
+                            <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 350px;">
+                                <!-- Thông tin người dùng -->
+                                <form action="">
+                                    <li>
+                                        <div class="text-center">
+                                            <img src="{{ Storage::disk('public')->exists(Auth::user()->avatar) ? asset(Storage::url(Auth::user()->avatar)) : Auth::user()->avatar }}" alt="Avatar" class="rounded-circle mb-2" width="100" height=" 100">
+                                            <h5 class="mb-0">{{Auth::user()->username}}</h5>
+                                        </div>
+                                        <hr>
+                                        <div class="mb-2">
+                                            <strong>Full Name:</strong> {{Auth::user()->username}}
+                                        </div>
+                                        <div class="mb-2">
+                                            <strong>Email:</strong> {{Auth::user()->email}}
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <strong>Address:</strong> {{Auth::user()->address}}
+                                        </div>
+                        
+                                        <div class="text-center">
+                                            
+                                            <a href="{{route('editInformation')}}" class="btn btn-default">Sửa thông tin </a>
+                                        </div>
+                                    </li>
+                                </form>
+                                <li><hr class="dropdown-divider"></li>
+                                <!-- Đơn hàng -->
                                 <li>
-                                    <div class="text-center">
-                                        <img src="{{asset('/storage/'.Auth::user()->avatar)}}" alt="Avatar" class="rounded-circle mb-2" width="100" height=" 100">
-                                        <h5 class="mb-0">{{Auth::user()->username}}</h5>
-                                        
-                                    </div>
-                    
-                                    <hr>
-                    
-                                    <div class="mb-2">
-                                        <strong>Full Name:</strong> {{Auth::user()->username}}
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Email:</strong> {{Auth::user()->email}}
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <strong>Address:</strong> {{Auth::user()->address}}
-                                    </div>
-                    
-                                    <div class="text-center">
-                                        
-                                        <a href="{{route('customer.editInformation')}}" class="btn btn-default">Sửa thông tin </a>
-                                    </div>
-                                </li>
-                            </form>
-                            <li><hr class="dropdown-divider"></li>
-                            <!-- Đơn hàng -->
-                            <li>
                                 <a class="dropdown-item" href="{{ route('order') }}">Đơn hàng</a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <!-- Đăng xuất -->
+                                <li class="d-flex">
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item text-danger" type="submit">Đăng xuất</button>
+                                    </form>
+                                    <form action="{{route('editPassword')}}">
+                                        @csrf
+                                        <button class="dropdown-item " type="submit">Đổi mật khẩu</button>
+                                    </form>
+                                </li>
                 
-                            <!-- Đăng xuất -->
-                            <li class="d-flex">
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="dropdown-item text-danger" type="submit">Đăng xuất</button>
-                                </form>
-                                <form action="{{route('customer.editPassword')}}">
-                                    @csrf
-                                    <button class="dropdown-item " type="submit">Đổi mật khẩu</button>
-                                </form>
-                            </li>
-                
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
+                    @endauth
                 </div>
                 
                 <div class="cart_icon font-icon">
-                    <a href="{{route('showCart')}}">
+                    <a class="text-dark" href="{{route('showCart')}}">
                         <i class="fa-solid fa-cart-shopping fs-5"></i>
                     </a>
                 </div>

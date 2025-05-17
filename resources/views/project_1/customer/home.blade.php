@@ -55,7 +55,7 @@
                             <div class="category">
                                 <span class="text-gray fw-medium" >{{$product->category->name}}</span>
                             </div>
-                            <h3 class="fs-6 text-truncate" >{{$product->name}}</h3>
+                            <h3 class="fs-6 text-truncate product-name" >{{$product->name}}</h3>
                             <div class="rank d-flex">
                                 <i class="fa-regular fa-star"></i>
                                 <i class="fa-regular fa-star"></i>
@@ -66,11 +66,7 @@
                             <div class="product-price">
                                 <span class="text-danger fw-medium">{{number_format($product->price)}}đ</span>
                             </div>
-                            <a href="#" 
-                            class="btn btn-primary  add_to_cart" 
-                            data-url = "{{route('addToCart',['id'=>$product->id])}}"
-                            >
-                              Add To Cart
+                            
                           </a>
                         </div>
                     </a>
@@ -105,7 +101,7 @@
             <div class="col-12 col-md-4 d-inline-block">
                 @foreach ($product_sell as $product)
                     <div class="product-item mb-3 py-2 border-1 border-bottom border-dark-subtle">
-                    <a href="" class="d-flex text-decoration-none text-dark">
+                    <a href="{{route('product', $product->id)}}" class="d-flex text-decoration-none text-dark">
                         <div class="col-3 col-md-6 col-lg-4 me-3">
                             <div class="image">
                                 <img src="{{asset(Storage::url($product->image_path))}}" alt="" class="img-fluid rounded-3">
@@ -113,7 +109,7 @@
                         </div>
                         <div class="col-10 col-md-8 py-3">
                             <div class="category text-gray fw-medium ">{{$product->category->name}}</div>
-                            <h5 class="fs-5 my-2">{{$product->name}}</h5>
+                            <h5 class="fs-5 my-2 product-name">{{$product->name}}</h5>
                             <div class="rank d-flex my-3">
                                 <i class="fa-regular fa-star"></i>
                                 <i class="fa-regular fa-star"></i>
@@ -129,7 +125,6 @@
                 </div> 
                 @endforeach
               
-            
             </div>
             
         </div>
@@ -154,16 +149,18 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="image">
-                                <img src="{{asset('images/81o8BYrG4BL.jpg')}}" alt="" class="img-fluid rounded-3">
+                                <img src="{{asset(Storage::url($hightrate_1->image_path))}}" alt="" class="img-fluid rounded-3">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="category">
-                                <span class="fw-medium text-gray">Fantasy</span>
+                                <span class="fw-medium text-gray">{{$hightrate_1->category->name}}</span>
                             </div> 
-                            <h3>They Both Die at the die</h3>
+                            <a class="text-decoration-none text-dark" href="{{route('product',$hightrate_1->id)}}">
+                                <h3 class="product-name two-line-truncate" style="">{{$hightrate_1->name}}</h3>
+                            </a>
                             <div class="description">
-                                <span class="fs-6">Regular fit, round neckline, long sleeves. 100% cotton, brushed inner side for extra comfort.</span>
+                                <span class="fs-6 four-line-truncate">{{$hightrate_1->description}}</span>
                             </div>
                             <div class="rank d-flex my-2 fs-6">
                                 <i class="fa-regular fa-star"></i>
@@ -173,7 +170,7 @@
                                 <i class="fa-regular fa-star"></i>
                             </div>
                             <div class="product-price">
-                                <span class="fs-5 text-danger fw-medium">$23.90</span>
+                                <span class="fs-5 text-danger fw-medium">{{ number_format($hightrate_1->price) }} đ</span>
                             </div>
                         </div>
                     </div>
@@ -184,16 +181,18 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="image">
-                                <img src="{{asset('images/hummingbird-printed-t-shirt.jpg')}}" alt="" class="img-fluid rounded-3">
+                                <img src="{{asset(Storage::url($hightrate_2->image_path))}}" alt="" class="img-fluid rounded-3">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="category">
-                                <span class="fw-medium text-gray">Fantasy</span>
+                                <span class="fw-medium text-gray">{{$hightrate_2->category->name}}</span>
                             </div>
-                            <h3>The Classic Harry</h3>
+                            <a class="text-decoration-none text-dark" href="{{route('product', $hightrate_2->id)}}">
+                                <h3 class="product-name two-line-truncate">{{ $hightrate_2->name }}</h3>
+                            </a>
                             <div class="description ">
-                                <span class="fs-6">Regular fit, round neckline, long sleeves. 100% cotton, brushed inner side for extra comfort.</span>
+                                <span class="fs-6 four-line-truncate">{{$hightrate_2->description}}</span>
                             </div>
 
                             <div class="rank d-flex my-2 fs-6">
@@ -204,7 +203,7 @@
                                 <i class="fa-regular fa-star"></i>
                             </div>
                             <div class="product-price">
-                                <span class="fs-5 text-danger fw-medium">$23.90</span>
+                                <span class="fs-5 text-danger fw-medium">{{ number_format($hightrate_2->price) }} đ</span>
                             </div>
                         </div>
                     </div>

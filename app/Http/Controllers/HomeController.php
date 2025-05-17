@@ -23,16 +23,21 @@ class HomeController extends Controller
         $customer = User::where('id', 2)->first();
         $settings = Setting::all();
 
-        return view('project_1.customer.home', compact('banners', 'products_best', 'product_sell','customer','settings'));
+        $hightrate_1 = Product::latest()->first();
+        $hightrate_2 = Product::where('id', '>', 3)->first();
+        return view('project_1.customer.home', compact('banners', 'products_best', 'product_sell','customer','settings' , 'hightrate_1', 'hightrate_2'));
     }
 
     public function show(Product $product) {
     
         return view('project_1.customer.product.index', compact('product'));
     }
+
     public function editInformation(){
         return(view('project_1.customer.information.edit'));
     }
+
+
     public function updateInformation(Request $request){
         // Lấy thông tin từ form
         $address = $request->address;
@@ -69,9 +74,11 @@ class HomeController extends Controller
     
         return redirect()->route('home')->with('success', 'Cập nhật thành công!');
     }
+
     public function editPassword(){
         return(view('project_1.customer.information.changePassword'));
     }
+
     public function updatePassword(Request $request){
   
         $request->validate([

@@ -20,30 +20,49 @@ use App\Http\Controllers\SettingController;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-Route::middleware(['auth',isMember::class])->prefix('home')->group(function() {
+Route::prefix('home')->group(function() {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
-    Route::get('/edit',[HomeController::class,'editInformation'])->name('customer.editInformation');
-    Route::post('/update', [HomeController::class, 'updateInformation'])->name('customer.updateInformation');
-    Route::get('/editpassword',[HomeController::class,'editPassword'])->name('customer.editPassword');
-    Route::post('/updatepassword',[HomeController::class,'updatePassword'])->name('customer.updatePassword');
+    Route::middleware(['auth',isMember::class])->group(function () {
+        Route::get('/edit',[HomeController::class,'editInformation'])->name('editInformation');
+    
+        Route::post('/update', [HomeController::class, 'updateInformation'])->name('updateInformation');
+        
+        Route::get('/editpassword',[HomeController::class,'editPassword'])->name('editPassword');
+        
+        Route::post('/updatepassword',[HomeController::class,'updatePassword'])->name('updatePassword');
 
+        Route::get('checkout/{product}', [CheckoutController::class, 'show'])->name('checkout');
 
+        Route::post('checkout/{product}', [CheckoutController::class, 'checkout'])->name('checkout.handle');
+
+        Route::get('vnpay/return', [CheckoutController::class, 'vnpayReturn'])->name('vnpay.return');
+
+        Route::get('order', [OrderController::class, 'index'])->name('order');
+        
+        // Show cart cho user
+        Route::get('/show-CartProducts', [ProductCartController::class, 'index'])->name('showCart');
+
+        // Thêm sản phẩm vào giỏ hàng
+        Route::get('/products/add-to-cart/{id}', [CustomCategoryController::class, 'addToCart'])->name('addToCart');
+
+        // Cập nhật giỏ hàng (AJAX)
+        Route::post('/cart/update', [ProductCartController::class, 'updateCart'])->name('cart.update');
+
+        // Xoá sản phẩm khỏi giỏ hàng (AJAX)
+        Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
+
+    });
+    
     Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
+        
+    Route::get('/category', [CustomCategoryController::class, 'index'])->name('custom.category.index');
 
-    Route::get('checkout/{product}', [CheckoutController::class, 'show'])->name('checkout');
+    Route::get('/category/{id}', [CustomCategoryController::class, 'listproduct'])->name('category.product');
+    
 
-    Route::post('checkout/{product}', [CheckoutController::class, 'checkout'])->name('checkout.handle');
-
-    Route::get('vnpay/return', [CheckoutController::class, 'vnpayReturn'])->name('vnpay.return');
-
-    Route::get('order', [OrderController::class, 'index'])->name('order');
 });
 
 
@@ -55,10 +74,9 @@ Route::post('/register', [AuthController::class, 'handle_register']);
 
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('web')->group(function () {
-    Route::get('google', [GoogleController::class, 'redirect'])->name('google');
-    Route::get('google/callback', [GoogleController::class, 'callback']);
-});
+Route::get('google', [GoogleController::class, 'redirect'])->name('google');
+Route::get('google/callback', [GoogleController::class, 'callback']);
+
 
 Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
 
@@ -92,23 +110,3 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
     
 });
 
-Route::prefix('custom')->group(function () {
-    
-    // Trang chính của category
-    Route::get('/category', [CustomCategoryController::class, 'index'])->name('custom.category.index');
-
-    // Danh sách sản phẩm theo category
-    Route::get('/category/{id}', [CustomCategoryController::class, 'listproduct'])->name('category.product');
-
-    // Show cart cho user
-    Route::get('/show-CartProducts', [ProductCartController::class, 'index'])->name('showCart');
-
-    // Thêm sản phẩm vào giỏ hàng
-    Route::get('/products/add-to-cart/{id}', [CustomCategoryController::class, 'addToCart'])->name('addToCart');
-
-    // Cập nhật giỏ hàng (AJAX)
-    Route::post('/cart/update', [ProductCartController::class, 'updateCart'])->name('cart.update');
-
-    // Xoá sản phẩm khỏi giỏ hàng (AJAX)
-    Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
-});
