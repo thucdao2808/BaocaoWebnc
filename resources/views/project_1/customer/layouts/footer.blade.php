@@ -19,7 +19,7 @@
                         <div class="icon" style="margin-right: 10px">
                           <i class="fa fa-phone mr-2 text-danger"></i>
                         </div>
-                        <span class="fw-medium">{{getConfigValueFromSettingTable('số điện thoại')}}</span>
+                        <span class="fw-medium">{{getConfigValueFromSettingTable('phone')}}</span>
                     </div>
                     <p class="mb-1 text-gray">Monday – Friday: 8:00–20:00</p>
                     <p class="mb-1 text-gray">Saturday: 11:00–15:00</p>
