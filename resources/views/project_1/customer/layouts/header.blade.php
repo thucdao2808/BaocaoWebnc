@@ -1,7 +1,7 @@
 <header>
     <div class="p-3 bg-warning">
         <span class="fs-6">Can we help you?</span>
-        <span class="fs-6 ">(+84)-363-922-397</span>
+        <span class="fs-6 ">{{getConfigValueFromSettingTable('số điện thoại')}}</span>
     </div>
     <div class="container">
         <div class="d-flex flex-wrap align-items-start justify-content-between py-3 my-3">

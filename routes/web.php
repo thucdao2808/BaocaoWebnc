@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\GoogleController;
-
+use App\Http\Controllers\SettingController;
 
 
 
@@ -79,6 +79,14 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
     });
 
     Route::resource('blogs', BlogController::class);
+    Route::prefix('setting')->group(function(){
+        Route::get('/',[SettingController::class,'index'])->name('settings.index');
+        Route::get('/create',[SettingController::class,'create'])->name('settings.create');
+        Route::post('/store',[SettingController::class,'store'])->name('settings.store');
+        Route::get('/edit/{id}',[SettingController::class,'edit'])->name('setting.edit');
+        Route::post('/update/{id}',[SettingController::class,'update'])->name('setting.update');
+        Route::delete('delete/{id}', [SettingController::class, 'destroy'])->name('setting.destroy');
+    });
 
 
     

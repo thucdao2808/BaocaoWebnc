@@ -24,12 +24,19 @@
                         <li><a class="dropdown-item px-2" href="{{route('products.index')}}">Quản lý sản phẩm</a></li>
                         <li><a class="dropdown-item px-2" href="{{route('categories.index')}}">Quản lý danh mục</a></li>
                         <li><a class="dropdown-item px-2" href="{{route('tags.index')}}">Quản lý thẻ</a></li>
+                        
                     </ul>
                 </li>
                 <li class="nav-link">
                     <a class="nav-link" href="{{route('banners.index')}}" role="button">
                         <i class="fa-solid fa-sliders"></i>
                         Quản lí banner
+                    </a>
+                </li>
+                 <li class="nav-link">
+                    <a class="nav-link" href="{{route('settings.index')}}" role="button">
+                        <i class="fa-solid fa-newspaper"></i>
+                        Quản lí setting
                     </a>
                 </li>
 

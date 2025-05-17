@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\User;
-
+use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
+ 
 
 
 class HomeController extends Controller
@@ -20,8 +21,9 @@ class HomeController extends Controller
         $products_best = Product::where('quantity', '<', 10)->get();
         $product_sell = Product::latest()->take(5)->get();
         $customer = User::where('id', 2)->first();
+        $settings = Setting::all();
 
-        return view('project_1.customer.home', compact('banners', 'products_best', 'product_sell','customer'));
+        return view('project_1.customer.home', compact('banners', 'products_best', 'product_sell','customer','settings'));
     }
 
     public function show(Product $product) {
