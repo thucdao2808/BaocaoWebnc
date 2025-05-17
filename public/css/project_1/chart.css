@@ -1,0 +1,27 @@
+
+    .chart-section {
+        width: 100%;
+        max-width: 1200px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    #revenueChart {
+        width: 100% !important;
+        height: 500px !important;
+    }
+
+    h3.chart-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: #333;
+    }
+    .container.mt-4 {
+    padding-top: 80px; /* hoặc bằng chiều cao header + khoảng cách */
+}
+
