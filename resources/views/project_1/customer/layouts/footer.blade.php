@@ -6,7 +6,7 @@
                     <img src="{{asset('images/footer-logo.png')}}" alt="" srcset="">
                 </div>
                 <div class="content text-gray">
-                    <span class="fw-medium">1418 River Drive, Suite 35 Cottonhall, CA 9622 United States</span>
+                    <span class="fw-medium">{{getConfigValueFromSettingTable('address')}}</span>
                 </div>
             </div>
 
@@ -15,16 +15,22 @@
                     <h4>Need help</h4>
                 </div>
                 <div class="content text-gray">
-                    <div class="phone">
-                        <div class="icon"></div>
-                        <span class="fw-medium">(+84)-1800-33358</span>
-                    </div>
-                    <div class="email">
-                        <div class="icon">
-
+                    <div class="phone d-flex">
+                        <div class="icon" style="margin-right: 10px">
+                          <i class="fa fa-phone mr-2 text-danger"></i>
                         </div>
-                        <span class="fw-medium">demo@demo.com</span>
+                        <span class="fw-medium">{{getConfigValueFromSettingTable('số điện thoại')}}</span>
                     </div>
+                    <p class="mb-1 text-gray">Monday – Friday: 8:00–20:00</p>
+                    <p class="mb-1 text-gray">Saturday: 11:00–15:00</p>
+                    <div class="email d-flex">
+                        <div class="icon" style="margin-right: 10px">
+                          <i class="fa fa-envelope mr-2 text-danger"></i>
+                        </div>
+                        <span class="fw-medium">{{getConfigValueFromSettingTable('email')}}</span>
+                    </div>
+                    
+                
                 </div>
             </div>
 
@@ -97,17 +103,23 @@
                 <div class="collapse d-lg-block" id="categoryList">
                   <div class="content text-gray">
                     <ul class="list-unstyled fw-medium">
-                      <li class="nav-link">Comedy</li>
-                      <li class="nav-link">Drama</li>
-                      <li class="nav-link">Horror</li>
-                      <li class="nav-link">Kids</li>
-                      <li class="nav-link">Romantic</li>
-                      <li class="nav-link">Comedy</li>
+                      @foreach ($categories as $category)
+                        <li class="nav-link">
+                          <a href="{{route('category.product',['id'=>$category->id])}}" class="nav-link  px-0 py-1">{{$category->name}}</a>
+                          
+
+                        </li>
+                      @endforeach
+                      
+                      
                     </ul>
                   </div>
                 </div>
             </div>
               
+        </div>
+        <div class="text-center pt-4 mt-4 border-top border-secondary">
+            <p class="mb-0 text-gray">&copy; 2021 Bookery. All Rights Reserved.</p>
         </div>
     </div>
 
