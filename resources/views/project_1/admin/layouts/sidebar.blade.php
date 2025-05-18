@@ -35,7 +35,7 @@
                 </li>
                  <li class="nav-link">
                     <a class="nav-link" href="{{route('settings.index')}}" role="button">
-                        <i class="fa-solid fa-newspaper"></i>
+                        <i class="fa-solid fa-gear"></i>
                         Quản lí setting
                     </a>
                 </li>
@@ -47,8 +47,13 @@
                     </a>
                 </li>
 
-          
-                
+                <li class="nav-link">
+                    <a class="nav-link" href="{{route('orders.index')}}" role="button">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        Quản đơn hàng
+                    </a>
+                </li>
+
             </ul>
         </nav>
     </div>

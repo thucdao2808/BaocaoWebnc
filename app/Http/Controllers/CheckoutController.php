@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Carbon\Carbon;
 use App\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +13,7 @@ use App\Models\OrderItem;
 use App\Models\Cartitem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
 
 
 class CheckoutController extends Controller
@@ -52,7 +53,9 @@ class CheckoutController extends Controller
                 'email'         => $request->email,
                 'address'       => $request->address,
                 'status'        => 'Chưa thanh toán',
-                'total_price'   => $request->total_price
+                'total_price'   => $request->total_price,
+                'expired_at'    => Carbon::now()->addMinutes(15) 
+
             ]);
 
             if ($request->has('cart_id')) {
@@ -82,7 +85,6 @@ class CheckoutController extends Controller
                     'price'         => $product->price,
                     'quantity'      => $request->quantity,
                     'total_price'   => $product->price * $request->quantity,
-                    'expired_at'    => Carbon::now()->addMinutes(15) 
                 ]);
             }
         });

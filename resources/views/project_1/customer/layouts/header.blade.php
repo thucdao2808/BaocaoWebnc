@@ -47,10 +47,24 @@
                                 <!-- Thông tin người dùng -->
                                 <form action="">
                                     <li>
+                                        @php
+                                            $avatar = Auth::user()->avatar;
+                                            $avatarUrl = '';
+
+                                            if ($avatar && Storage::disk('public')->exists($avatar)) {
+                                                $avatarUrl = asset(Storage::url($avatar));
+                                            } elseif(empty($avatar)) {
+                                                $avatarUrl = asset('images/avatar.png'); // hoặc thay thế bằng ảnh mặc định nếu muốn
+                                            } else {
+                                                $avatarUrl = $avatar; // hoặc thay thế bằng ảnh mặc định nếu muốn
+                                            }
+                                        @endphp
+
                                         <div class="text-center">
-                                            <img src="{{ Storage::disk('public')->exists(Auth::user()->avatar) ? asset(Storage::url(Auth::user()->avatar)) : Auth::user()->avatar }}" alt="Avatar" class="rounded-circle mb-2" width="100" height=" 100">
-                                            <h5 class="mb-0">{{Auth::user()->username}}</h5>
+                                            <img src="{{ $avatarUrl }}" alt="Avatar" class="rounded-circle mb-2" width="100" height="100">
+                                            <h5 class="mb-0">{{ Auth::user()->username }}</h5>
                                         </div>
+
                                         <hr>
                                         <div class="mb-2">
                                             <strong>Full Name:</strong> {{Auth::user()->username}}
@@ -123,7 +137,7 @@
                                     <a class="nav-link fw-bolder" href="{{route('about.index')}}">Giới thiệu</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" href="#">Tin tức</a>
+                                    <a class="nav-link fw-bolder" href="{{route('news.index')}}">Tin tức</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bolder" href="{{route('helppage.index')}}">Liên hệ</a>

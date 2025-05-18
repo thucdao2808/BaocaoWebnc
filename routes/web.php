@@ -19,7 +19,9 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\HelpPageController;
 use App\Http\Controllers\AboutPageController;
-
+use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\NewsController;
 
 Route::prefix('home')->group(function() {
 
@@ -54,8 +56,11 @@ Route::prefix('home')->group(function() {
         // Xoá sản phẩm khỏi giỏ hàng (AJAX)
         Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
         //Trang liên hệ
-         Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
-          Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
+        Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
+        Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
+
+        Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+
         
     });
     
@@ -83,13 +88,14 @@ Route::get('google/callback', [GoogleController::class, 'callback']);
 
 Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
 
-    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::get('/', [StatisticController::class, 'index'])->name('admin');
 
     Route::resource('products', ProductController::class);
 
     Route::resource('categories', CategoryController::class);
 
     Route::resource('tags', TagController::class);
+    
 
     Route::prefix('banners')->group(function() {
         Route::get('/', [BannerController::class, 'index'])->name('banners.index');
@@ -98,7 +104,9 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
 
         Route::delete('delete/{banner}', [BannerController::class, 'delete'])->name('banners.destroy');
     });
-
+    // Route::get('/statistics', [StatisticController::class, 'index'])->name('admin.statistics');
+    Route::get('/admin/statistics/filter', [StatisticController::class, 'filter'])->name('statistics.filter');
+    Route::get('/admin/statistics/export', [StatisticController::class, 'exportExcel'])->name('statistics.export');
     Route::resource('blogs', BlogController::class);
     Route::prefix('setting')->group(function(){
         Route::get('/',[SettingController::class,'index'])->name('settings.index');
@@ -109,6 +117,10 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
         Route::delete('delete/{id}', [SettingController::class, 'destroy'])->name('setting.destroy');
     });
 
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::post('orders/{id}/approve', [AdminOrderController::class, 'approve'])->name('orders.approve');
+    Route::get('orders/{id}/print', [AdminOrderController::class, 'print'])->name('orders.print');
 
     
 });
