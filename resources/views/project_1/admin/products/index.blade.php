@@ -65,12 +65,9 @@
                        <td>{{$product->category->name}}</td>
                       
                        <td>
-                            <select name = "tags[]"  class="form-control  tags_select_choose" multiple="multiple">
-                                @foreach ($product->tags as $tagItem)
-                                    <option value="{{$tagItem->name}}" selected>{{$tagItem->name}}</option>
-                                @endforeach
-                                
-                            </select>
+                            @foreach ($product->tags as $tagItem)
+                                <span class="badge bg-success ">{{$tagItem->name}}</span>
+                            @endforeach
                        </td>
 
                        <td>{{$product->quantity}}</td>
@@ -93,9 +90,9 @@
         </table>
      </div>
          
-        <div class="my-5 border-top p-3">
-            {{$products->links()}}
-        </div>
+    <div class="my-5 border-top p-3">
+        {{$products->links()}}
+    </div>
         
     </div>
  </div>

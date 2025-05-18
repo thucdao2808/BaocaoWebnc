@@ -53,6 +53,8 @@
 
                                             if ($avatar && Storage::disk('public')->exists($avatar)) {
                                                 $avatarUrl = asset(Storage::url($avatar));
+                                            } elseif(empty($avatar)) {
+                                                $avatarUrl = asset('images/avatar.png'); // hoặc thay thế bằng ảnh mặc định nếu muốn
                                             } else {
                                                 $avatarUrl = $avatar; // hoặc thay thế bằng ảnh mặc định nếu muốn
                                             }
@@ -135,7 +137,7 @@
                                     <a class="nav-link fw-bolder" href="{{route('about.index')}}">Giới thiệu</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bolder" href="#">Tin tức</a>
+                                    <a class="nav-link fw-bolder" href="{{route('news.index')}}">Tin tức</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bolder" href="{{route('helppage.index')}}">Liên hệ</a>

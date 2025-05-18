@@ -20,6 +20,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\HelpPageController;
 use App\Http\Controllers\AboutPageController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\NewsController;
 
 Route::prefix('home')->group(function() {
 
@@ -54,8 +56,11 @@ Route::prefix('home')->group(function() {
         // Xoá sản phẩm khỏi giỏ hàng (AJAX)
         Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
         //Trang liên hệ
-         Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
-          Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
+        Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
+        Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
+
+        Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+
         
     });
     
@@ -112,6 +117,10 @@ Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {
         Route::delete('delete/{id}', [SettingController::class, 'destroy'])->name('setting.destroy');
     });
 
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::post('orders/{id}/approve', [AdminOrderController::class, 'approve'])->name('orders.approve');
+    Route::get('orders/{id}/print', [AdminOrderController::class, 'print'])->name('orders.print');
 
     
 });

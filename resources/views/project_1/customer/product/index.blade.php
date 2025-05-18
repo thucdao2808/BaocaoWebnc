@@ -6,7 +6,7 @@
             <div class="bg-light-pink p-3 d-flex justify-content-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                      <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-gray">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-gray">Trang chủ</a></li>
                       <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-gray">{{$product->category->name}}</a></li>
                       <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-gray">{{$product->name}}</a></li>
                     </ol>

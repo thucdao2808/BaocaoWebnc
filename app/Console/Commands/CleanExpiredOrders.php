@@ -3,38 +3,27 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\Order;
+use Laravel\Prompts\info;
+use Laravel\Schedule\Attributes\AsSchedule;
 
+#[AsSchedule('everyFifteenMinutes')] // ← Gắn lịch tại đây
 class CleanExpiredOrders extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'orders:clean-expired';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Xoá các đơn hàng chưa thanh toán sau 15 phút';
 
-    /**
-     * Execute the console command.
-     */
-    public function handle()
+    public function handle(): void  
     {
         $expiredOrders = Order::where('status', 'Chưa thanh toán')
             ->where('created_at', '<', now()->subMinutes(15))
             ->get();
 
         foreach ($expiredOrders as $order) {
-            $order->items()->delete(); // xoá order_items liên quan
-            $order->delete();          // xoá đơn hàng
+            $order->items()->delete();
+            $order->delete();
         }
 
-        $this->info("Đã xoá {$expiredOrders->count()} đơn hàng hết hạn.");
+        info("Đã xoá {$expiredOrders->count()} đơn hàng hết hạn.");
     }
-    
 }
