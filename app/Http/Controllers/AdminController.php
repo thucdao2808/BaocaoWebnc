@@ -10,9 +10,9 @@ class AdminController extends Controller
 {
     
 
-    public function index() {
-        return view('project_1.admin.home');
-    }
+    // public function index() {
+    //     return view('project_1.admin.home');
+    // }
 
     
 }

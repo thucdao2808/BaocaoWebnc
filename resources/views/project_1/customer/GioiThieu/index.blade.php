@@ -4,37 +4,28 @@
 @extends('project_1.customer.layouts.layout')
 @section('css')
      <style>
-    body {
-      font-family: 'Arial', sans-serif;
-    }
-    .topbar {
-      background-color: #ff5e14;
+   <style>
+    .top-bar {
+      background: #ff4500;
       color: white;
-      padding: 5px 20px;
       font-size: 14px;
-    }
-    .contact-form input, .contact-form textarea {
-      margin-bottom: 15px;
-    }
-    .orange-btn {
-      background-color: #ff5e14;
-      border: none;
-      color: white;
-    }
-    .orange-btn:hover {
-      background-color: #e04d0d;
+      padding: 5px 0;
+      text-align: center;
     }
     .footer {
-      background-color: #000;
-      color: white;
-      padding: 30px 0;
+      background: #222;
+      color: #ccc;
+      padding: 40px 0;
     }
     .footer a {
-      color: #fff;
+      color: #ccc;
       text-decoration: none;
     }
     .footer a:hover {
-      text-decoration: underline;
+      color: white;
+    }
+    .breadcrumb {
+      background-color: transparent;
     }
   </style>
 @endsection
