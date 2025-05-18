@@ -25,8 +25,8 @@ use App\Http\Controllers\NewsController;
 
 Route::prefix('home')->group(function() {
 
+   
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    
     Route::middleware(['auth',isMember::class])->group(function () {
         Route::get('/edit',[HomeController::class,'editInformation'])->name('editInformation');
     
@@ -64,6 +64,7 @@ Route::prefix('home')->group(function() {
         
     });
     
+    
     Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
         
     Route::get('/category', [CustomCategoryController::class, 'index'])->name('custom.category.index');
@@ -84,6 +85,12 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('google', [GoogleController::class, 'redirect'])->name('google');
 Route::get('google/callback', [GoogleController::class, 'callback']);
+
+Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name('showForgotForm');
+Route::post('/forgot-password', [AuthController::class, 'sendResetCode'])->name('sendResetCode');
+Route::get('/verify-code', [AuthController::class, 'showVerifyForm'])->name('showVerifyForm');
+Route::post('/verify-code', [AuthController::class, 'verifyCode'])->name('verifyCode');
+
 
 
 Route::middleware(['auth',isAdmin::class])->prefix('admin')->group(function () {

@@ -62,7 +62,7 @@
                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg" type="submit">Đăng nhập</button>
                     </div>
 
-                    <a href="#!">Quên mật khẩu?</a>
+                    <a href="{{route('showForgotForm')}}">Quên mật khẩu?</a>
                     <div class="d-flex mt-3">
                         <span>Bạn chưa có tài khoản?</span>
                         <a class="mx-2" href="{{route('register')}}">Đăng ký</a>
