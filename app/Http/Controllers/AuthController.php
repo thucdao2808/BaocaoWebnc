@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -78,5 +81,67 @@ class AuthController extends Controller
         
         return redirect('login');
     }
+    public function showForgotForm() {
+        return view('project_1.forgotpassword.forgot_index');
+    }
+    public function sendResetCode(Request $request) {
+        
+         $request->validate([
+                'email' => 'required|email|exists:users,email',
+            ], [
+                'email.exists' => 'Email chưa được đăng ký trong hệ thống.',
+            ]);
+
+        $code = rand(100000, 999999);
+
+        DB::table('password_resets')->updateOrInsert(
+            ['email' => $request->email],
+            ['token' => $code, 'created_at' => now()]
+        );
+
+        Mail::raw("Mã xác thực đặt lại mật khẩu của bạn là: $code", function ($message) use ($request) {
+            $message->to($request->email)
+                    ->subject('Mã đặt lại mật khẩu');
+        });
+
+            return redirect()->route('showVerifyForm')->with('email', $request->email)->with('success', 'Mã xác nhận đã được gửi đến email của bạn.');
+
+        }
+    public function showVerifyForm() {
+        return view('project_1.forgotpassword.verify');
+    }
+
+    public function verifyCode(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'code' => 'required',
+            'password' => 'required|confirmed',  // confirmed sẽ check password_confirmation
+        ], [
+            'email.exists' => 'Email chưa được đăng ký trong hệ thống.',
+            'password.confirmed' => 'Mật khẩu nhập lại không khớp.',
+        ]);
+
+        // Kiểm tra mã code
+        $reset = DB::table('password_resets')
+                ->where('email', $request->email)
+                ->where('token', $request->code)
+                ->first();
+
+        if (!$reset) {
+            return back()->withInput()->with('error_code', 'Mã xác thực không chính xác.');
+        }
+
+        // Nếu đúng, tiến hành cập nhật mật khẩu...
+        $user = User::where('email', $request->email)->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        // Xóa mã xác thực sau khi dùng
+        DB::table('password_resets')->where('email', $request->email)->delete();
+
+        return redirect()->route('login')->with('success', 'Mật khẩu đã được thay đổi thành công.');
+    }
+
 
 }
