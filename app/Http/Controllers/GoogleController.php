@@ -21,21 +21,25 @@ public function redirect()
 
 public function callback()
 {
-    $googleUser = Socialite::driver('google')->user();
+    try {
+        $googleUser = Socialite::driver('google')->user();
 
-    // Tìm hoặc tạo người dùng trong hệ thống
-    $user = User::firstOrCreate(
-        ['email' => $googleUser->getEmail()],
-        [   
-            'username' => $googleUser->getName(),
-            'avatar' =>$googleUser->getAvatar(),
-            'password' => Hash::make(Str::random(24)),
-        ]
-    );
+        $user = User::firstOrCreate(
+            ['email' => $googleUser->getEmail()],
+            [   
+                'username' => $googleUser->getName(),
+                'avatar' =>$googleUser->getAvatar(),
+                'password' => Hash::make(Str::random(24)),
+            ]
+        );
 
-    Auth::login($user);
+        Auth::login($user);
 
     return redirect('/home');
+    } catch (\Throwable $th) {
+        return redirect('login')->with('error', 'lỗi đăng nhập google');
+    }
+   
 }
 
 }

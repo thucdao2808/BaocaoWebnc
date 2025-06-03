@@ -43,22 +43,22 @@
                         <div class="information p-3 border  shadow">
                             <p class="fs-4 fw-medium text-center">Thông tin khách hàng</p>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name" id="fullname" placeholder="Họ và tên" value="{{old('name')}}">
+                                <input type="text" class="form-control" name="name" id="fullname" placeholder="Họ và tên" value="{{Auth::user()->username}}">
                                 <label for="fullname">Họ và tên</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email" value="{{old('email')}}">
+                                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="email" value="{{Auth::user()->email}}">
                                 <label for="floatingInput">Email</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" value="{{old('phone')}}">
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" value="{{Auth::user()->phone}}">
                                 <label for="phone">Số điện thoại</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" placeholder="Địa chỉ" name="address" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <textarea class="form-control" placeholder="Địa chỉ" name="address" id="floatingTextarea2" style="height: 100px">{{Auth::user()->address}}</textarea>
                                 <label for="floatingTextarea2">Địa chỉ</label>
                             </div>
 

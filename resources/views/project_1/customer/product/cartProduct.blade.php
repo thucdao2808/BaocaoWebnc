@@ -80,7 +80,6 @@
                                   <h6 class="mb-0">{{number_Format($cartItem['price'])}} đ</h6>
                                   </div>
                                   <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                  <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
                                   <a href="" class="btn btn-danger cart_delete" 
                                       data-url ="{{route('cart.delete')}}"
                                       data-id="{{$cartItem['id']}}">Xóa</a>
@@ -129,9 +128,8 @@
                           <div class="d-flex justify-content-between mb-5">
                             <h5 class="text-uppercase">Total price</h5>
                             <div class="">
-                              <span class="mb-0 total-price text-danger fw-medium" data-price="{{$total}}">
-                                  {{ number_format($total) }} đ
-                              </span>
+                              <h5 class="total-price-sidebar text-danger fw-medium fs-6">{{number_Format($total)}}đ</h5>
+
                             </div>
                           </div>
                           

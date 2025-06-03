@@ -56,15 +56,12 @@ Route::prefix('home')->group(function() {
         // Xoá sản phẩm khỏi giỏ hàng (AJAX)
         Route::get('/delete/cart', [ProductCartController::class, 'deleteCart'])->name('cart.delete');
         //Trang liên hệ
-        Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
-        Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
-
-        Route::get('/news', [NewsController::class, 'index'])->name('news.index');
-
         
     });
     
-    
+    Route::get('/lienhe', [HelpPageController::class, 'index'])->name('helppage.index');
+    Route::get('/gioithieu', [AboutPageController::class, 'index'])->name('about.index');
+    Route::get('/news', [NewsController::class, 'index'])->name('news.index');
     Route::get('product/{product}', [HomeController::class, 'show'])->name('product');
         
     Route::get('/category', [CustomCategoryController::class, 'index'])->name('custom.category.index');

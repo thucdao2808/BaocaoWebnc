@@ -18,7 +18,19 @@
   <div class="row">
     <!-- Left Column: Profile Info -->
     <div class="col-md-4 text-center border-right">
-      <img class="profile-img mt-3" src="{{Storage::disk('public')->exists(Auth::user()->avatar) ? asset(Storage::url(Auth::user()->avatar)) : Auth::user()->avatar }}" alt="Avatar">
+      @php
+          $avatar = Auth::user()->avatar;
+          $avatarUrl = '';
+
+          if ($avatar && Storage::disk('public')->exists($avatar)) {
+              $avatarUrl = asset(Storage::url($avatar));
+          } elseif(empty($avatar)) {
+              $avatarUrl = asset('images/avatar.png'); // hoặc thay thế bằng ảnh mặc định nếu muốn
+          } else {
+              $avatarUrl = $avatar; // hoặc thay thế bằng ảnh mặc định nếu muốn
+          }
+      @endphp
+      <img class="profile-img mt-3" src="{{$avatarUrl}}" alt="Avatar">
       <div class="profile-name">{{Auth::user()->username}}</div>
       <div class="profile-email">{{Auth::user()->email}}</div>
       <div class="text-muted mt-1">United States</div>
