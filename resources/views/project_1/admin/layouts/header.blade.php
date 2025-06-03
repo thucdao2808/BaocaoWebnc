@@ -16,7 +16,7 @@
                                 <li>
                                     <form action="{{route('logout')}}" method="POST">
                                         @csrf
-                                        <button type="submit">Đăng xuất</button>
+                                        <button class="px-3" type="submit">Đăng xuất</button>
                                     </form>
                                 </li>
                             </ul>
